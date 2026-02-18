@@ -1,0 +1,1 @@
+("~/projects/ctschwandt.github.io/" "~/courses/" "~/dev/dotfiles/" "~/dotfiles/" "/usr/share/sddm/themes/simple_sddm_2/")

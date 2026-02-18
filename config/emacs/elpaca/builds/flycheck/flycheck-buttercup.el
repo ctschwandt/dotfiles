@@ -1,0 +1,1 @@
+/home/ctschwandt/.config/emacs/elpaca/repos/flycheck/flycheck-buttercup.el

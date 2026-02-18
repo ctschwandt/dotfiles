@@ -1,0 +1,23 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("fish aliases"
+ (filename . "~/.config/fish/conf.d/10-aliases.fish")
+ (front-context-string . "\nalias emacs \"co")
+ (rear-context-string . "open \"xdg-open\"\n")
+ (position . 348)
+ (last-modified 27027 23502 620150 362000))
+("ciss358"
+ (filename . "~/courses/ciss358/")
+ (front-context-string . "a\n  drwxr-xr-x. ")
+ (rear-context-string . "36 Feb  4 06:27 ")
+ (position . 207)
+ (last-modified 27012 54627 681782 346000))
+("ciss445"
+ (filename . "~/courses/ciss445/")
+ (front-context-string . "a\n  drwxr-xr-x. ")
+ (rear-context-string . "24 Feb  4 06:27 ")
+ (position . 207)
+ (last-modified 27012 54595 918377 736000))
+)

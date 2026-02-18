@@ -1,0 +1,27 @@
+# Ignore everything by default
+*
+
+# Allow these top-level entries
+!.gitignore
+!README.md
+!config/
+
+# Allow everything under config/
+!config/**
+
+# Common junk
+**/.cache/
+**/Cache/
+**/cache/
+**/*.log
+**/*.tmp
+
+# Emacs junk / large history files
+config/emacs/undo-tree-history/
+config/emacs/auto-save-list/
+config/emacs/**/undo-tree-history/
+config/emacs/**/auto-save-list/
+config/emacs/**/*.~undo-tree~
+config/emacs/**/*~
+config/emacs/**/#*#
+config/emacs/**/.#*
