@@ -1,1 +1,1 @@
-("~/projects/ctschwandt.github.io/" "~/courses/" "~/projects/dotfiles/" "~/dev/dotfiles/" "~/dotfiles/" "/usr/share/sddm/themes/simple_sddm_2/")
+("~/courses/" "~/projects/ctschwandt.github.io/" "~/projects/dotfiles/" "~/dev/dotfiles/" "~/dotfiles/" "/usr/share/sddm/themes/simple_sddm_2/")
