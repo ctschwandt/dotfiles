@@ -49,7 +49,7 @@
 - [[#theme][THEME]]
 - [[#tldr][TLDR]]
 - [[#transparency][TRANSPARENCY]]
-- [[#tuareg-orcaml-formatting][TUAREG ORCAML FORMATTING]]
+- [[#tuareg-ocaml-formatting][TUAREG OCAML FORMATTING]]
 - [[#which-key][WHICH-KEY]]
 
 * IMPORTANT PROGRAMS TO LOAD FIRST
@@ -1069,7 +1069,7 @@ With Emacs version 29, true transparency has been added.  I have turned transpar
 
 #+end_src
 
-* TUAREG ORCAML FORMATTING
+* TUAREG OCAML FORMATTING
 #+begin_src emacs-lisp
 ;; -------------------------
 ;; OCaml (Tuareg + Merlin + ocp-indent + ocamlformat)
@@ -1146,7 +1146,7 @@ With Emacs version 29, true transparency has been added.  I have turned transpar
       (kbd "TAB") #'indent-for-tab-command
       (kbd "<tab>") #'indent-for-tab-command)))
 #+end_src
-
+      
 * WHICH-KEY
 #+begin_src emacs-lisp
 (use-package which-key
