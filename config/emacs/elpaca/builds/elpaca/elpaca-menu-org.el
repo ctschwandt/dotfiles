@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/elpaca/elpaca-menu-org.el
+/home/ctschwandt/.config/emacs/elpaca/sources/elpaca/elpaca-menu-org.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/company-mode/company-cmake.el
+/home/ctschwandt/.config/emacs/elpaca/sources/company-mode/company-cmake.el

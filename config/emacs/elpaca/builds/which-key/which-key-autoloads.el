@@ -9,16 +9,16 @@
 
 ;;; Generated autoloads from which-key.el
 
-(defvar which-key-mode nil "\
-Non-nil if Which-Key mode is enabled.
+(defvar which-key-mode nil
+"Non-nil if Which-Key mode is enabled.
 See the `which-key-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `which-key-mode'.")
 (custom-autoload 'which-key-mode "which-key" nil)
-(autoload 'which-key-mode "which-key" "\
-Toggle `which-key-mode'.
+(autoload 'which-key-mode "which-key"
+"Toggle `which-key-mode'.
 
 This is a global minor mode.  If called interactively, toggle the
 `Which-Key mode' mode.  If the prefix argument is positive, enable the
@@ -35,20 +35,20 @@ The mode's hook is called both when the mode is enabled and when it is
 disabled.
 
 (fn &optional ARG)" t)
-(autoload 'which-key-setup-side-window-right "which-key" "\
-Set up side-window on right." t)
-(autoload 'which-key-setup-side-window-right-bottom "which-key" "\
-Set up side-window on right if space allows.
+(autoload 'which-key-setup-side-window-right "which-key"
+"Set up side-window on right." t)
+(autoload 'which-key-setup-side-window-right-bottom "which-key"
+"Set up side-window on right if space allows.
 Otherwise, use bottom." t)
-(autoload 'which-key-setup-side-window-bottom "which-key" "\
-Set up side-window that opens on bottom." t)
-(autoload 'which-key-setup-minibuffer "which-key" "\
-Set up minibuffer display.
+(autoload 'which-key-setup-side-window-bottom "which-key"
+"Set up side-window that opens on bottom." t)
+(autoload 'which-key-setup-minibuffer "which-key"
+"Set up minibuffer display.
 Do not use this setup if you use the paging commands.  Instead use
 `which-key-setup-side-window-bottom', which is nearly identical
 but more functional." t)
-(autoload 'which-key-add-keymap-based-replacements "which-key" "\
-Replace the description of KEY using REPLACEMENT in KEYMAP.
+(autoload 'which-key-add-keymap-based-replacements "which-key"
+"Replace the description of KEY using REPLACEMENT in KEYMAP.
 KEY should take a format suitable for use in `kbd'.  REPLACEMENT
 should be a cons cell of the form (STRING . COMMAND) for each
 REPLACEMENT, where STRING is the replacement string and COMMAND
@@ -65,8 +65,8 @@ for REPLACEMENT will eventually be removed.
 
 (fn KEYMAP KEY REPLACEMENT &rest MORE)")
 (function-put 'which-key-add-keymap-based-replacements 'lisp-indent-function 'defun)
-(autoload 'which-key-add-key-based-replacements "which-key" "\
-Replace the description of KEY-SEQUENCE with REPLACEMENT.
+(autoload 'which-key-add-key-based-replacements "which-key"
+"Replace the description of KEY-SEQUENCE with REPLACEMENT.
 KEY-SEQUENCE is a string suitable for use in `kbd'.
 REPLACEMENT may either be a string, as in
 
@@ -87,89 +87,89 @@ MORE allows you to specifcy additional KEY REPLACEMENT pairs.  All
 replacements are added to `which-key-replacement-alist'.
 
 (fn KEY-SEQUENCE REPLACEMENT &rest MORE)")
-(autoload 'which-key-add-major-mode-key-based-replacements "which-key" "\
-Functions like `which-key-add-key-based-replacements'.
+(autoload 'which-key-add-major-mode-key-based-replacements "which-key"
+"Functions like `which-key-add-key-based-replacements'.
 The difference is that MODE specifies the `major-mode' that must
 be active for KEY-SEQUENCE and REPLACEMENT (MORE contains
 addition KEY-SEQUENCE REPLACEMENT pairs) to apply.
 
 (fn MODE KEY-SEQUENCE REPLACEMENT &rest MORE)")
 (function-put 'which-key-add-major-mode-key-based-replacements 'lisp-indent-function 'defun)
-(autoload 'which-key-reload-key-sequence "which-key" "\
-Simulate entering the key sequence KEY-SEQ.
+(autoload 'which-key-reload-key-sequence "which-key"
+"Simulate entering the key sequence KEY-SEQ.
 KEY-SEQ should be a list of events as produced by
 `listify-key-sequence'.  If nil, KEY-SEQ defaults to
 `which-key--current-key-list'.  Any prefix arguments that were
 used are reapplied to the new key sequence.
 
 (fn &optional KEY-SEQ)")
-(autoload 'which-key-show-standard-help "which-key" "\
-Call the command in `which-key--prefix-help-cmd-backup'.
+(autoload 'which-key-show-standard-help "which-key"
+"Call the command in `which-key--prefix-help-cmd-backup'.
 Usually this is `describe-prefix-bindings'.
 
 (fn &optional _)" t)
-(autoload 'which-key-show-next-page-no-cycle "which-key" "\
-Show next page of keys or `which-key-show-standard-help'." t)
-(autoload 'which-key-show-previous-page-no-cycle "which-key" "\
-Show previous page of keys if one exists." t)
-(autoload 'which-key-show-next-page-cycle "which-key" "\
-Show the next page of keys, cycling from end to beginning.
+(autoload 'which-key-show-next-page-no-cycle "which-key"
+"Show next page of keys or `which-key-show-standard-help'." t)
+(autoload 'which-key-show-previous-page-no-cycle "which-key"
+"Show previous page of keys if one exists." t)
+(autoload 'which-key-show-next-page-cycle "which-key"
+"Show the next page of keys, cycling from end to beginning.
 
 (fn &optional _)" t)
-(autoload 'which-key-show-previous-page-cycle "which-key" "\
-Show the previous page of keys, cycling from beginning to end.
+(autoload 'which-key-show-previous-page-cycle "which-key"
+"Show the previous page of keys, cycling from beginning to end.
 
 (fn &optional _)" t)
-(autoload 'which-key-show-top-level "which-key" "\
-Show top-level bindings.
+(autoload 'which-key-show-top-level "which-key"
+"Show top-level bindings.
 
 (fn &optional _)" t)
-(autoload 'which-key-show-major-mode "which-key" "\
-Show top-level bindings in the map of the current major mode.
+(autoload 'which-key-show-major-mode "which-key"
+"Show top-level bindings in the map of the current major mode.
 This function will also detect evil bindings made using
 `evil-define-key' in this map.  These bindings will depend on the
 current evil state.
 
 (fn &optional ALL)" t)
-(autoload 'which-key-show-full-major-mode "which-key" "\
-Show all bindings in the map of the current major mode.
+(autoload 'which-key-show-full-major-mode "which-key"
+"Show all bindings in the map of the current major mode.
 This function will also detect evil bindings made using
 `evil-define-key' in this map.  These bindings will depend on the
 current evil state." t)
-(autoload 'which-key-dump-bindings "which-key" "\
-Dump bindings from PREFIX into buffer named BUFFER-NAME.
+(autoload 'which-key-dump-bindings "which-key"
+"Dump bindings from PREFIX into buffer named BUFFER-NAME.
 PREFIX should be a string suitable for `kbd'.
 
 (fn PREFIX BUFFER-NAME)" t)
-(autoload 'which-key-undo-key "which-key" "\
-Undo last keypress and force which-key update.
+(autoload 'which-key-undo-key "which-key"
+"Undo last keypress and force which-key update.
 
 (fn &optional _)" t)
-(autoload 'which-key-C-h-dispatch "which-key" "\
-Dispatch \\`C-h' commands by looking up key in `which-key-C-h-map'.
+(autoload 'which-key-C-h-dispatch "which-key"
+"Dispatch \\`C-h' commands by looking up key in `which-key-C-h-map'.
 This command is always accessible (from any prefix) if
 `which-key-use-C-h-commands' is non nil." t)
-(autoload 'which-key-show-keymap "which-key" "\
-Show the top-level bindings in KEYMAP using which-key.
+(autoload 'which-key-show-keymap "which-key"
+"Show the top-level bindings in KEYMAP using which-key.
 KEYMAP is selected interactively from all available keymaps.
 
 If NO-PAGING is non-nil, which-key will not intercept subsequent
 keypresses for the paging functionality.
 
 (fn KEYMAP &optional NO-PAGING)" t)
-(autoload 'which-key-show-full-keymap "which-key" "\
-Show all bindings in KEYMAP using which-key.
+(autoload 'which-key-show-full-keymap "which-key"
+"Show all bindings in KEYMAP using which-key.
 KEYMAP is selected interactively from all available keymaps.
 
 (fn KEYMAP)" t)
-(autoload 'which-key-show-minor-mode-keymap "which-key" "\
-Show the top-level bindings in KEYMAP using which-key.
+(autoload 'which-key-show-minor-mode-keymap "which-key"
+"Show the top-level bindings in KEYMAP using which-key.
 KEYMAP is selected interactively by mode in
 `minor-mode-map-alist'.
 
 (fn &optional ALL)" t)
-(autoload 'which-key-show-full-minor-mode-keymap "which-key" "\
-Show all bindings in KEYMAP using which-key.
+(autoload 'which-key-show-full-minor-mode-keymap "which-key"
+"Show all bindings in KEYMAP using which-key.
 KEYMAP is selected interactively by mode in
 `minor-mode-map-alist'." t)
 (register-definition-prefixes "which-key" '("evil-state" "which-key-"))

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/peep-dired/peep-dired.el
+/home/ctschwandt/.config/emacs/elpaca/sources/peep-dired/peep-dired.el

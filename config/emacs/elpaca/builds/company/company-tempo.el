@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/company-mode/company-tempo.el
+/home/ctschwandt/.config/emacs/elpaca/sources/company-mode/company-tempo.el

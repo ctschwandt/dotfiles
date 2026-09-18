@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/org-bullets/org-bullets.el
+/home/ctschwandt/.config/emacs/elpaca/sources/org-bullets/org-bullets.el

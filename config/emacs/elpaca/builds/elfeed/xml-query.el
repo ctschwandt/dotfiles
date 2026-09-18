@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/elfeed/xml-query.el
+/home/ctschwandt/.config/emacs/elpaca/sources/elfeed/xml-query.el

@@ -30,8 +30,8 @@
 
 ;;; Generated autoloads from evil-digraphs.el
 
-(autoload 'evil-digraph "evil-digraphs" "\
-Convert DIGRAPH to character or list representation.
+(autoload 'evil-digraph "evil-digraphs"
+"Convert DIGRAPH to character or list representation.
 If DIGRAPH is a list (CHAR1 CHAR2), return the corresponding character;
 if DIGRAPH is a character, return the corresponding list.
 Searches in `evil-digraphs-table-user' and `evil-digraphs-table'.

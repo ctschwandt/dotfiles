@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/evil-collection/evil-collection.el
+/home/ctschwandt/.config/emacs/elpaca/sources/evil-collection/evil-collection.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/magit/docs/magit.texi
+/home/ctschwandt/.config/emacs/elpaca/sources/magit/docs/magit.texi

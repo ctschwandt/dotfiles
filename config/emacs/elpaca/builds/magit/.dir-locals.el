@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/magit/.dir-locals.el
+/home/ctschwandt/.config/emacs/elpaca/sources/magit/.dir-locals.el

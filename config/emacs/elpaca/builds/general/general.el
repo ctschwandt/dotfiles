@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/general/general.el
+/home/ctschwandt/.config/emacs/elpaca/sources/general/general.el

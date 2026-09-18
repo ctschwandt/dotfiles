@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/inf-haskell.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/inf-haskell.el

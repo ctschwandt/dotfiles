@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/tldr/tldr.el
+/home/ctschwandt/.config/emacs/elpaca/sources/tldr/tldr.el

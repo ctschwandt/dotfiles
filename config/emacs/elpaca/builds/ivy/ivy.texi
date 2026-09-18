@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/swiper/doc/ivy.texi
+/home/ctschwandt/.config/emacs/elpaca/sources/swiper/doc/ivy.texi

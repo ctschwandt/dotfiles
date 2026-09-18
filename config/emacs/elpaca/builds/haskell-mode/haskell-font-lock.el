@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/haskell-font-lock.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/haskell-font-lock.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/magit/lisp/magit-section.el
+/home/ctschwandt/.config/emacs/elpaca/sources/magit/lisp/magit-section.el

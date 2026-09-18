@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/w3m-haddock.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/w3m-haddock.el

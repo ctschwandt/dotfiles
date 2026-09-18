@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/company-box/company-box.el
+/home/ctschwandt/.config/emacs/elpaca/sources/company-box/company-box.el

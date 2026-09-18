@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/emacs-neotree/neotree.el
+/home/ctschwandt/.config/emacs/elpaca/sources/emacs-neotree/neotree.el

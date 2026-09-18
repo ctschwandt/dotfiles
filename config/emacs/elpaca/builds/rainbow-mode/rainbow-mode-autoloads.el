@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from rainbow-mode.el
 
-(autoload 'rainbow-mode "rainbow-mode" "\
-Colorize strings that represent colors.
+(autoload 'rainbow-mode "rainbow-mode"
+"Colorize strings that represent colors.
 
 This will fontify with colors the string like \"#aabbcc\" or \"blue\".
 

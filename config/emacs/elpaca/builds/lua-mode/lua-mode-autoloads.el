@@ -9,15 +9,19 @@
 
 ;;; Generated autoloads from lua-mode.el
 
-(autoload 'lua-mode "lua-mode" "\
-Major mode for editing Lua code.
+(autoload 'lua-mode "lua-mode"
+"Major mode for editing Lua code.
 
-(fn)" t)
+In addition to any hooks its parent mode `prog-mode' might have run,
+this mode runs the hook `lua-mode-hook', as the final or penultimate
+step during initialization.
+
+\\{lua-mode-map}" t)
 (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 (defalias 'run-lua #'lua-start-process)
-(autoload 'lua-start-process "lua-mode" "\
-Start a Lua process named NAME, running PROGRAM.
+(autoload 'lua-start-process "lua-mode"
+"Start a Lua process named NAME, running PROGRAM.
 PROGRAM defaults to NAME, which defaults to `lua-default-application'.
 When called interactively, switch to the process buffer.
 

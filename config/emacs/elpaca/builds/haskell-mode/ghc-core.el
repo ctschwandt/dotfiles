@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/ghc-core.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/ghc-core.el

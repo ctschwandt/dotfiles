@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/llama/llama.el
+/home/ctschwandt/.config/emacs/elpaca/sources/llama/llama.el

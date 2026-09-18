@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/magit/docs/AUTHORS.md
+/home/ctschwandt/.config/emacs/elpaca/sources/magit/docs/AUTHORS.md

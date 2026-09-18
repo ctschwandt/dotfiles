@@ -1,4 +1,4 @@
-This is elpaca.info, produced by makeinfo version 7.2 from elpaca.texi.
+This is elpaca.info, produced by makeinfo version 7.3 from elpaca.texi.
 
 INFO-DIR-SECTION Emacs
 START-INFO-DIR-ENTRY
@@ -57,26 +57,10 @@ Basic concepts
 
 Recipes
 
-* host |fetcher: host | fetcher.
-* repo::
-* branch::
-* tag::
-* ref::
-* pin::
-* depth::
-* files::
-* protocol::
-* remotes::
-* main::
-* build::
-* inherit::
-* pre-build::
-* post-build::
-* autoloads::
-* version::
-* vars::
-* wait::
-* Inheritance precedence::
+* Package types::
+* General recipe keywords::
+* Repository recipe keywords::
+* Recipe inheritance precedence::
 * elpaca-recipe-functions::
 
 Menus
@@ -125,15 +109,15 @@ come before any calls to other Elpaca functions/macros.  This will clone
 Elpaca into your ‘user-emacs-directory’ under the ‘elpaca’ subdirectory.
 It then builds and activates Elpaca.
 
-     (defvar elpaca-installer-version 0.11)
+     (defvar elpaca-installer-version 0.12)
      (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
      (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-     (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+     (defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
      (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
                                    :ref nil :depth 1 :inherit ignore
                                    :files (:defaults "elpaca-test.el" (:exclude "extensions"))
-                                   :build (:not elpaca--activate-package)))
-     (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+                                   :build (:not elpaca-activate)))
+     (let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
             (build (expand-file-name "elpaca/" elpaca-builds-directory))
             (order (cdr elpaca-order))
             (default-directory repo))
@@ -213,7 +197,7 @@ Updating Packages^*                     ‘p’ ‘x’                         
 Rebuilding Packages                     ‘r’ ‘x’                               ‘elpaca-rebuild’
 Deleting Packages                       ‘d’ ‘x’                               ‘elpaca-delete’
 View Package Logs                       ‘g’ ‘l’                               ‘elpaca-log’
-Visit Package Repository Directory      ‘v’                                   ‘elpaca-visit’
+Visit Package Source Directory          ‘v’                                   ‘elpaca-visit’
 Visit Package Build Directory           ‘C-u’ ‘v’                             ‘C-u M-x’ ‘elpaca-visit’
 Browse Package Website                  ‘b’                                   ‘elpaca-browse’
    ​* Update is an alias for "pull".  It's encouraged to fetch, review,
@@ -261,7 +245,7 @@ Consider the following example:
      (elpaca package-b (message "Third")) ; Queue Third
      (elpaca-process-queues) ; Process queue: First messaged, Third messaged.
 
-   "Second" will be message _before_ "First" and "Third".  If a form
+   "Second" will be messaged _before_ "First" and "Third".  If a form
 should be evaluated after a package is installed/activated, put it in
 that package declaration's _BODY_. Declaration _BODY_ forms are
 evaluated synchronously in declared order.  e.g.
@@ -315,345 +299,302 @@ plist with any of the following recipe keywords:
 
 * Menu:
 
-* host |fetcher: host | fetcher.
-* repo::
-* branch::
-* tag::
-* ref::
-* pin::
-* depth::
-* files::
-* protocol::
-* remotes::
-* main::
-* build::
-* inherit::
-* pre-build::
-* post-build::
-* autoloads::
-* version::
-* vars::
-* wait::
-* Inheritance precedence::
+* Package types::
+* General recipe keywords::
+* Repository recipe keywords::
+* Recipe inheritance precedence::
 * elpaca-recipe-functions::
 
 
-File: elpaca.info,  Node: host | fetcher,  Next: repo,  Up: Recipes
+File: elpaca.info,  Node: Package types,  Next: General recipe keywords,  Up: Recipes
 
-2.2.1.1 :host | :fetcher
-........................
+2.2.1.1 Package types
+.....................
 
-A symbol or string representing the hosting service of the repository.
-Strings are inserted in the URI verbatim.
+The ‘:type’ recipe keyword allows specifying a symbol representing the
+type of package to install.  Elpaca searches for a matching
+‘elpaca-types’ entry to load a library supporting the type if necessary.
+The default supported types are:
+   • ‘git’ for local and remote git repositories.
+   • ‘tar’ for tarball archives.
+   • ‘file’ for local files and directories.
 
-     (example :host github)
-     (example :fetcher gitlab)
-     (example :host "www.example.com")
-
-
-File: elpaca.info,  Node: repo,  Next: branch,  Prev: host | fetcher,  Up: Recipes
-
-2.2.1.2 :repo
-.............
-
-A string of the form ‘USER/REPO’ when used with the ‘:host’ keyword; a
-local file path or remote URL when ‘:host’ is not used.
-
-     (example :host github :repo "user/example") ;;downloaded from github
-
-     (local :repo "~/repos/local/") ;;built from local filesystem
-
-     (remote :repo "https://foo.example/example.git") ;;remote clone
-
-   A cons cell of the form ‘(REMOTE . LOCAL)’ will rename the local
-repository:
-
-     (remote :repo ("https://foo.example/example.git" . "local-name"))
-     ;;This will still clone the repository under `elpaca-repos-directory'
-     (remote :repo ("~/repos/local" . "local-name"))
+   Different package types may interpret recipe keywords differently or
+ignore them altogether.
 
 
-File: elpaca.info,  Node: branch,  Next: tag,  Prev: repo,  Up: Recipes
+File: elpaca.info,  Node: General recipe keywords,  Next: Repository recipe keywords,  Prev: Package types,  Up: Recipes
 
-2.2.1.3 :branch
-...............
+2.2.1.2 General recipe keywords
+...............................
 
-The repository branch to check out when installing the package.
+The following recipe keywords apply to all the default package types.
 
-     (example :host github :repo "user/example" :branch "main")
+  1. :autoloads
+
+     The name of the file the package's autoload file.  When ‘nil’,
+     autoload loading and generation are disabled for the package.  When
+     ‘t’, the default autoload file is generated/loaded
+     (‘PACKAGE-NAME-autoloads.el’).  The value may also be a string
+     which is expanded relative to the package's build directory.  e.g.
+     ‘"org-loaddefs.el"’.
+
+  2. :build
+
+     A list of build steps executed in order.  Accepted values are:
+        • nil to disable all build steps
+          (example :build nil) ;; Disable all build steps
+        • A substitution rule of the form ‘(TYPE TARGET
+          SUBSTITUTIONS...)’ The ‘SUBSTITUTIONS’ are function symbols
+          which replace the ‘TARGET’ symbol.  ‘TYPE’ is one of the
+          following keywords:
+             • ‘:after’ places ‘SUBSTITUTIONS’ after ‘TARGET’.
+             • ‘:before’ places ‘SUBSTITUTIONS’ before ‘TARGET’.
+             • ‘:first’ places ‘TARGET’ and ‘SUBSTITUTIONS’ at the
+               beginning of the list.
+             • ‘:last’ places ‘TARGET’ and ‘SUBSTITUTIONS’ at the end of
+               the list.
+             • ‘:sub’ replaces ‘TARGET’ with ‘SUBSTITUTIONS’.
+             • ‘:not’ removes ‘TARGET’ and ‘SUBSTITUTIONS’.
+          (example :build (:after fn1 fn1.5)) ;; Insert fn1.5 after fn1
+          (example :build (:before fn1 fn0)) ;; Insert fn0 before fn1.
+          (example :build (:sub fn1 subbed)) ;; Substitute fn1 with subbed.
+          (example :build (:not fn1 fn2)) ;; Remove fn1 and fn2
+
+        • A list of substitution rules.  Each rule is run in declared
+          order and applied to the previous rule's results.
+          ;; All of the above in a single recipe.
+          (example :build ((:after fn1 fn1.5)) (:before fn1 fn0) (:sub fn1 subbed) (:not fn1 fn2))
+
+     A typical build recipe for an elisp package involves:
+       1. Getting the source files on disk.
+       2. Byte-compiling the package's elisp and generating package
+          autoloads.
+       3. Building and installing package documentation.
+       4. Activating the package (adding the package ‘load-path’,
+          loading autoloads).
+
+     The ‘elpaca-default-build-steps’ variable contains the default
+     build steps.
+
+  3. :files
+
+     The files linked from the package's source directory to its build
+     directory.
+
+     Each element of the list is either:
+        • The symbol ‘:defaults’, which expands to
+          ‘elpaca-default-files-directive’.
+        • A string naming files or folders.  Shell glob patterns match
+          multiple files.
+        • A list starting with the ‘:exclude’ keyword.  The remaining
+          elements are not linked.
+
+          (example :files (:defaults "extensions/*")) ;; Link everything in the extensions folder.
+          (example :files (:defaults (:exclude "*.c"))) ;; Exclude all files with the "c" file extension.
+
+  4. :inherit
+
+     When non-nil, inherit _PROPS_ from ‘elpaca-order-functions’ and
+     possibly ‘elpaca-menu-functions’.  For example, without
+     inheritance:
+
+          (elpaca-recipe '(doct :inherit nil))
+
+     returns the recipe as declared:
+
+          (:source nil :package "doct" :id doct :inherit nil)
+
+     With inheritance enabled:
+
+          (elpaca-recipe '(dracula-theme :inherit t)))
+
+          (:package "dracula-theme" :fetcher github :repo "dracula/emacs" :files
+                    ("*.el" "*.el.in" "dir" "*.info" "*.texi" "*.texinfo" "doc/dir"
+                     "doc/*.info" "doc/*.texi" "doc/*.texinfo" "lisp/*.el" "docs/dir"
+                     "docs/*.info" "docs/*.texi" "docs/*.texinfo"
+                     (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el"
+                               "*-tests.el" "LICENSE" "README*" "*-pkg.el"))
+                    :source "MELPA" :id dracula-theme :inherit t :type git :protocol https
+                    :depth treeless)
+
+     the Elpaca's MELPA menu provides the rest of the recipe.
+
+     The value may also be a menu symbol or list of menu symbols.  This
+     is a per-recipe way of setting ‘elpaca-menu-functions’.
+
+          (elpaca-recipe '(dracula-theme :inherit elpaca-menu-nongnu-elpa))
+
+          (:package "dracula-theme" :repo
+                    ("https://github.com/dracula/emacs" . "dracula-theme") :tar "1.8.3"
+                    :host nongnu :files
+                    ("*"
+                     (:exclude ".git" "INSTALL.md" "screenshot.png" "start_emacs_test.sh"
+                               "test-profile.el"))
+                    :source "NonGNU ELPA" :id dracula-theme :inherit
+                    elpaca-menu-nongnu-elpa :type git :protocol https :depth treeless)
+
+  5. :main
+
+     The name of the main elisp file.  When provided this can speed up
+     the process of cloning and loading a package's dependencies.  When
+     declared ‘nil’, skip dependency check.
+
+          (example :main "example.el")
+
+          (example :main nil)
+
+  6. :pin
+
+     When non-nil, ignore the package during update commands.
+
+          (example :pin t)
+
+  7. :vars
+
+     A list of values to bind via ‘let*’ when executing a package's
+     build steps.  e.g.
+
+          (elpaca (example :vars ((some-dynamic-var t))))
+
+     The current elpaca data structure and current build step are bound
+     to the ‘elpaca’ and ‘elpaca-build-step’ variables within the form.
+
+     Wrapping a declaration in a ‘let*’ form will not suffice because
+     the steps are run asynchronously.  The bindings will not be in
+     scope by the time each build step is run.
+
+  8. :version
+
+     A function which must accept an Elpaca struct as its sole argument.
+     It must return a version string understood by ‘version-to-list’.
+     e.g.
+
+          (elpaca (example :version (lambda (_) "1.0.0")))
+
+  9. :wait
+
+     When non-nil, process all queued orders immediately before
+     continuing.  e.g.
+
+          (elpaca (general :wait t))
 
 
-File: elpaca.info,  Node: tag,  Next: ref,  Prev: branch,  Up: Recipes
+File: elpaca.info,  Node: Repository recipe keywords,  Next: Recipe inheritance precedence,  Prev: General recipe keywords,  Up: Recipes
 
-2.2.1.4 :tag
-............
+2.2.1.3 Repository recipe keywords
+..................................
 
-The tag to check out when installing the package.
+The following recipe keywords apply to ‘:type =git’ packages.
 
-     (example :host github :repo "user/example" :tag "v1.0")
+  1. :branch
 
-
-File: elpaca.info,  Node: ref,  Next: pin,  Prev: tag,  Up: Recipes
+     The repository branch to check out when installing the package.
 
-2.2.1.5 :ref
-............
+          (example :host github :repo "user/example" :branch "main")
 
-The git ref(1) to check out when installing the package.
+  2. :depth
 
-     (example :host github :repo "user/example" :ref "a76ca0a") ;; Check out a specific commit.
+     The package repository's history depth.
+
+          (example :depth treeless) ;; https://git-scm.com/docs/partial-clone
+          (example :depth blobless) ;; https://git-scm.com/docs/partial-clone
+          (example :depth 1) ;; Shallow clone with history truncated to 1 commit.
+          (example :depth nil) ;; Full repository clone.
+
+  3. :host | :fetcher
+
+     A symbol or string representing a repository's hosting service.
+     Strings are inserted in the URI verbatim.
+
+          (example :host github)
+          (example :fetcher gitlab)
+          (example :host "www.example.com")
+
+  4. :protocol
+
+     The protocol to use when cloning repositories.
+
+     The value must be a symbol, either ‘https’ or ‘ssh’.
+
+          (example :protocol https) ; Use the https protocol.
+          (example :protocol ssh) ; Use the ssh protocol.
+
+  5. :ref
+
+     The git ref(1) to check out when installing the package.
+
+          (example :host github :repo "user/example" :ref "a76ca0a") ;; Check out a specific commit.
+
+  6. :remotes
+
+     Configures the repository remotes(2).
+
+     The value must be a single remote spec or a list of remote specs.
+     The first remote given will have its ref checked out when cloning
+     the repository.  A spec may be a string to rename the default
+     remote.  The following will rename the cloned remote (usually
+     "origin" by git convention) to "upstream":
+
+          (example :remotes "upstream")
+
+     In order to add a another remote, a spec may be a list of the form:
+
+          ("NAME" [PROPS])
+
+     _NAME_ is a string indicating the name of the remote.  _PROPS_ is
+     an optional plist used to override inherited recipe keywords.
+
+     For example:
+
+          (example :host github :repo "upstream/example"
+                   :remotes ("fork" :repo "fork/zenburn-emacs"))
+
+     Will add a remote named fork which points to a repository hosted on
+     the same forge as the upstream remote.  The following does the same
+     above, additionally adding a third remote at a different forge.
+
+          (example :host github :repo "upstream/example"
+                   :remotes (("fork" :repo "fork/zenburn-emacs") ; :host github inherited from above
+                             ("other" :host gitlab :repo "other/zenburn-emacs")))
+
+  7. :repo
+
+     A string of the form ‘USER/REPO’ when used with the ‘:host’
+     keyword; a local file path or remote URL when ‘:host’ is not used.
+
+          (example :host github :repo "user/example") ;;downloaded from github
+
+          (local :repo "~/repos/local/") ;;built from local filesystem
+
+          (remote :repo "https://foo.example/example.git") ;;remote clone
+
+     A cons cell of the form ‘(REMOTE . LOCAL)’ will rename the local
+     repository:
+
+          (remote :repo ("https://foo.example/example.git" . "local-name"))
+          ;;This will still clone the repository under `elpaca-sources-directory'
+          (remote :repo ("~/repos/local" . "local-name"))
+
+  8. :tag
+
+     The tag to check out when installing the package.
+
+          (example :host github :repo "user/example" :tag "v1.0")
 
    ---------- Footnotes ----------
 
    (1) git ref
 (https://git-scm.com/book/en/v2/Git-Internals-Git-References)
 
-
-File: elpaca.info,  Node: pin,  Next: depth,  Prev: ref,  Up: Recipes
-
-2.2.1.6 :pin
-............
-
-When non-nil, ignore the package during update commands.
-
-     (example :pin t)
-
-
-File: elpaca.info,  Node: depth,  Next: files,  Prev: pin,  Up: Recipes
-
-2.2.1.7 :depth
-..............
-
-The package repository's history depth.
-
-     (example :depth treeless) ;; https://git-scm.com/docs/partial-clone
-     (example :depth blobless) ;; https://git-scm.com/docs/partial-clone
-     (example :depth 1) ;; Shallow clone with history truncated to 1 commit.
-     (example :depth nil) ;; Full repository clone.
-
-
-File: elpaca.info,  Node: files,  Next: protocol,  Prev: depth,  Up: Recipes
-
-2.2.1.8 :files
-..............
-
-The files linked from the package's repository to its build directory.
-
-   Each element of the list is either:
-   • The symbol ‘:defaults’, which expands to
-     ‘elpaca-default-files-directive’.
-   • A string naming files or folders.  Shell glob patterns match
-     multiple files.
-   • A list starting with the ‘:exclude’ keyword.  The remaining
-     elements are not linked.
-
-     (example :files (:defaults "extensions/*")) ;; Link everything in the extensions folder.
-     (example :files (:defaults (:exclude "*.c"))) ;; Exclude all files with the "c" file extension.
-
-
-File: elpaca.info,  Node: protocol,  Next: remotes,  Prev: files,  Up: Recipes
-
-2.2.1.9 :protocol
-.................
-
-The protocol to use when cloning repositories.
-
-   The value must be a symbol, either ‘https’ or ‘ssh’.
-
-     (example :protocol https) ; Use the https protocol.
-     (example :protocol ssh) ; Use the ssh protocol.
-
-
-File: elpaca.info,  Node: remotes,  Next: main,  Prev: protocol,  Up: Recipes
-
-2.2.1.10 :remotes
-.................
-
-Configures the repository remotes(1).
-
-   The value must be a single remote spec or a list of remote specs.
-The first remote given will have its ref checked out when cloning the
-repository.  A spec may be a string to rename the default remote.  The
-following will rename the cloned remote (usually "origin" by git
-convention) to "upstream":
-
-     (example :remotes "upstream")
-
-   In order to add a another remote, a spec may be a list of the form:
-
-     ("NAME" [PROPS])
-
-   _NAME_ is a string indicating the name of the remote.  _PROPS_ is an
-optional plist used to override inherited recipe keywords.
-
-   For example:
-
-     (example :host github :repo "upstream/example"
-              :remotes ("fork" :repo "fork/zenburn-emacs"))
-
-   Will add a remote named fork which points to a repository hosted on
-the same forge as the upstream remote.  The following does the same
-above, additionally adding a third remote at a different forge.
-
-     (example :host github :repo "upstream/example"
-              :remotes (("fork" :repo "fork/zenburn-emacs") ; :host github inherited from above
-                        ("other" :host gitlab :repo "other/zenburn-emacs")))
-
-   ---------- Footnotes ----------
-
-   (1) remotes
+   (2) remotes
 (https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes)
 
 
-File: elpaca.info,  Node: main,  Next: build,  Prev: remotes,  Up: Recipes
+File: elpaca.info,  Node: Recipe inheritance precedence,  Next: elpaca-recipe-functions,  Prev: Repository recipe keywords,  Up: Recipes
 
-2.2.1.11 :main
-..............
-
-The name of the main elisp file.  When provided this can speed up the
-process of cloning and loading a package's dependencies.  When declared
-‘nil’, skip dependency check.
-
-     (example :main "example.el")
-
-     (example :main nil)
-
-
-File: elpaca.info,  Node: build,  Next: inherit,  Prev: main,  Up: Recipes
-
-2.2.1.12 :build
-...............
-
-A list of build steps, nil or t.  To remove steps from
-‘elpaca-default-build-steps’ by starting the list with the ‘:not’
-keyword.
-
-     (example :build (:not elpaca--byte-compile))
-
-
-File: elpaca.info,  Node: inherit,  Next: pre-build,  Prev: build,  Up: Recipes
-
-2.2.1.13 :inherit
-.................
-
-When non-nil, inherit _PROPS_ from ‘elpaca-order-functions’ and possibly
-‘elpaca-menu-functions’.  For example, without inheritance:
-
-     (elpaca-recipe '(doct :inherit nil))
-
-   returns the recipe as declared:
-
-     (:source nil :inherit nil :package "doct")
-
-   With inheritance enabled:
-
-     (elpaca-recipe '(dracula-theme :inherit t)))
-
-     (:package "dracula-theme" :fetcher github :repo "dracula/emacs" :files
-               ("*.el" "*.el.in" "dir" "*.info" "*.texi" "*.texinfo" "doc/dir"
-                "doc/*.info" "doc/*.texi" "doc/*.texinfo" "lisp/*.el" "docs/dir"
-                "docs/*.info" "docs/*.texi" "docs/*.texinfo"
-                (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el"
-                          "*-tests.el" "LICENSE" "README*" "*-pkg.el"))
-               :source "MELPA" :protocol https :inherit t :depth treeless)
-
-   the Elpaca's MELPA menu provides the rest of the recipe.
-
-   The value may also be a menu symbol or list of menu symbols.  This is
-a per-recipe way of setting ‘elpaca-menu-functions’.
-
-     (elpaca-recipe '(dracula-theme :inherit elpaca-menu-non-gnu-elpa))
-
-     (:package "dracula-theme" :repo
-               ("https://github.com/dracula/emacs" . "dracula-theme") :files
-               ("*"
-                (:exclude ".git" "INSTALL.md" "screenshot.png" "start_emacs_test.sh"
-                          "test-profile.el"))
-               :source "NonGNU ELPA" :protocol https :inherit
-               elpaca-menu-non-gnu-elpa :depth treeless)
-
-
-File: elpaca.info,  Node: pre-build,  Next: post-build,  Prev: inherit,  Up: Recipes
-
-2.2.1.14 :pre-build
-...................
-
-Commands and/or elisp evaluated prior to ‘:build’ steps with the package
-repository as ‘default-directory’.  Each command is either an elisp form
-or a list of strings executed in a shell context of the form:
-
-     ("executable" "argument"...)
-
-   For example:
-
-     (elpaca (example :pre-build (("configure") ("make" "install"))))
-
-
-File: elpaca.info,  Node: post-build,  Next: autoloads,  Prev: pre-build,  Up: Recipes
-
-2.2.1.15 :post-build
-....................
-
-The same as ‘:pre-build’, but run just before activating a package.
-
-     (elpaca (example :post-build (message "activate next")))
-
-
-File: elpaca.info,  Node: autoloads,  Next: version,  Prev: post-build,  Up: Recipes
-
-2.2.1.16 :autoloads
-...................
-
-The name of the file the package's autoload file.  When ‘nil’, autoload
-loading and generation are disabled for the package.  When ‘t’, the
-default autoload file is generated/loaded (‘PACKAGE-NAME-autoloads.el’).
-The value may also be a string which is expanded relative to the
-package's build directory.  e.g.  ‘"org-loaddefs.el"’.
-
-
-File: elpaca.info,  Node: version,  Next: vars,  Prev: autoloads,  Up: Recipes
-
-2.2.1.17 :version
-.................
-
-A function which must accept an Elpaca struct as its sole argument.  It
-must return a version string understood by ‘version-to-list’.  e.g.
-
-     (elpaca (example :version (lambda (_) "1.0.0")))
-
-
-File: elpaca.info,  Node: vars,  Next: wait,  Prev: version,  Up: Recipes
-
-2.2.1.18 :vars
-..............
-
-A list of values to bind via ‘let*’ when executing a package's build
-steps.  e.g.
-
-     (elpaca (example :vars ((some-dynamic-var t))))
-
-   The current elpaca data structure and current build step are bound to
-the ‘elpaca’ and ‘elpaca-build-step’ variables within the form.
-
-   Wrapping a declaration in a ‘let*’ form will not suffice because the
-steps are run asynchronously.  The bindings will not be in scope by the
-time each build step is run.
-
-
-File: elpaca.info,  Node: wait,  Next: Inheritance precedence,  Prev: vars,  Up: Recipes
-
-2.2.1.19 :wait
-..............
-
-When non-nil, process all queued orders immediately before continuing.
-e.g.
-
-     (elpaca (general :wait t))
-
-
-File: elpaca.info,  Node: Inheritance precedence,  Next: elpaca-recipe-functions,  Prev: wait,  Up: Recipes
-
-2.2.1.20 Inheritance precedence
-...............................
+2.2.1.4 Recipe inheritance precedence
+.....................................
 
 The following list shows the precedence of inheritance from highest to
 lowest:
@@ -677,10 +618,10 @@ lowest:
        :repo "emacs-evil/evil")
 
 
-File: elpaca.info,  Node: elpaca-recipe-functions,  Prev: Inheritance precedence,  Up: Recipes
+File: elpaca.info,  Node: elpaca-recipe-functions,  Prev: Recipe inheritance precedence,  Up: Recipes
 
-2.2.1.21 elpaca-recipe-functions
-................................
+2.2.1.5 elpaca-recipe-functions
+...............................
 
 The abnormal hook ‘elpaca-recipe-functions’ runs via
 ‘run-hook-with-args-until-success’ just before installing the package.
@@ -695,8 +636,8 @@ keywords despite allowing recipe inheritance.
                                         (list :cheese 'extra)))))
        (elpaca-recipe 'burger))
 
-     (:source nil :protocol https :inherit t :depth treeless :package "burger"
-              :cheese extra)
+     (:source nil :package "burger" :id burger :type git :protocol https :inherit t
+              :depth treeless :cheese extra)
 
 
 File: elpaca.info,  Node: Menus,  Next: Orders,  Prev: Recipes,  Up: Basic concepts
@@ -816,7 +757,7 @@ the following function disables recipe inheritance by default:
      (let ((elpaca-order-functions '((lambda (_) "Disable inheritance." '(:inherit nil)))))
        (elpaca-recipe 'burger))
 
-     (:source nil :inherit nil :package "burger")
+     (:source nil :package "burger" :id burger :inherit nil)
 
 
 File: elpaca.info,  Node: Queues,  Next: Installing Packages,  Prev: Orders,  Up: Basic concepts
@@ -964,7 +905,7 @@ elpaca-ui-mark-pull          p         Mark package at point for ‘elpaca-pull�
 elpaca-ui-mark-rebuild       r         Mark package at point for ‘elpaca-rebuild’.
 elpaca-ui-search             s         Filter current buffer by QUERY.  If QUERY is nil, prompt for it.
 elpaca-ui-unmark             u         Unmark current package or packages in active region.
-elpaca-ui-visit              v         Visit current package’s repo or BUILD directory.
+elpaca-ui-visit              v         Visit current package’s source or BUILD directory.
 elpaca-ui-execute-marks      x         Execute each mark in ‘elpaca-ui-marked-packages’.
 
  -- Function: elpaca-manager &optional recache
@@ -1051,56 +992,57 @@ File: elpaca.info,  Node: Search tags,  Prev: Searching,  Up: UI
 
 Tag Table:
 Node: Top184
-Node: Installation2248
-Node: Requirements2523
-Node: Installer2709
-Ref: installation-script3078
-Ref: Installer-Footnote-16142
-Ref: Installer-Footnote-26269
-Node: Usage6374
-Node: Quick Start6541
-Ref: Quick Start-Footnote-110861
-Node: Basic concepts11026
-Node: Recipes11466
-Node: host | fetcher12108
-Node: repo12443
-Node: branch13195
-Node: tag13433
-Node: ref13647
-Ref: ref-Footnote-113936
-Node: pin14014
-Node: depth14195
-Node: files14618
-Node: protocol15322
-Node: remotes15665
-Ref: remotes-Footnote-116984
-Node: main17065
-Node: build17412
-Node: inherit17713
-Ref: recipe-inheritance-nil17975
-Ref: recipe-inheritance-t18133
-Ref: recipe-inheritance-menu18897
-Node: pre-build19355
-Node: post-build19824
-Node: autoloads20093
-Node: version20572
-Node: vars20891
-Node: wait21464
-Node: Inheritance precedence21697
-Node: elpaca-recipe-functions22471
-Ref: recipe-functions-example23086
-Node: Menus23378
-Node: elpaca-menu-functions24808
-Node: Updating menus25474
-Node: Orders25790
-Node: elpaca-order-functions26222
-Node: Queues26998
-Node: Installing Packages27979
-Node: Lock Files29158
-Node: use-package Integration29810
-Node: UI31216
-Node: Searching34153
-Node: Search tags35721
+Node: Installation2106
+Node: Requirements2381
+Node: Installer2567
+Ref: installation-script2936
+Ref: Installer-Footnote-15997
+Ref: Installer-Footnote-26124
+Node: Usage6229
+Node: Quick Start6396
+Ref: Quick Start-Footnote-110717
+Node: Basic concepts10882
+Node: Recipes11322
+Node: Package types11822
+Node: General recipe keywords12445
+Ref: autoloads12710
+Ref: build13107
+Ref: files15074
+Ref: inherit15738
+Ref: recipe-inheritance-nil15905
+Ref: recipe-inheritance-t16086
+Ref: recipe-inheritance-menu16947
+Ref: main17522
+Ref: pin17797
+Ref: vars17899
+Ref: version18410
+Ref: wait18643
+Node: Repository recipe keywords18776
+Ref: branch19059
+Ref: depth19213
+Ref: host | fetcher19568
+Ref: protocol19822
+Ref: ref20079
+Ref: remotes20255
+Ref: repo21520
+Ref: tag22218
+Ref: Repository recipe keywords-Footnote-122383
+Ref: Repository recipe keywords-Footnote-222461
+Node: Recipe inheritance precedence22542
+Node: elpaca-recipe-functions23357
+Ref: recipe-functions-example23977
+Node: Menus24290
+Node: elpaca-menu-functions25720
+Node: Updating menus26386
+Node: Orders26702
+Node: elpaca-order-functions27134
+Node: Queues27921
+Node: Installing Packages28902
+Node: Lock Files30081
+Node: use-package Integration30733
+Node: UI32139
+Node: Searching35078
+Node: Search tags36646
 
 End Tag Table
 

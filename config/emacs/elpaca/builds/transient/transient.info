@@ -1,4 +1,4 @@
-This is transient.info, produced by makeinfo version 7.2 from
+This is transient.info, produced by makeinfo version 7.3 from
 transient.texi.
 
      Copyright (C) 2018-2026 Free Software Foundation, Inc.
@@ -32,7 +32,7 @@ used to implement similar menus in other packages.
 resource to get over that hurdle is Psionic K's interactive tutorial,
 available at <https://github.com/positron-solutions/transient-showcase>.
 
-This manual is for Transient version 0.12.0.
+This manual is for Transient version 0.13.8.
 
      Copyright (C) 2018-2026 Free Software Foundation, Inc.
 
@@ -687,9 +687,16 @@ Commands::.
 
  -- User Option: transient-enable-menu-navigation
      This option controls whether navigation commands are enabled in
-     transient's menu buffer.  If the value is ‘verbose’ (the default),
-     brief documentation about the command under point is additionally
-     show in the echo area.
+     transient menu buffer, and whether additional documentation is
+     shown in the echo area while doing so.
+
+     If the value is ‘verbose’ (the default), additional documentation
+     about the command at point is shown in the echo area.  If this
+     would result in the same documentation, which is being displayed
+     inside the menu buffer, to be duplicated in the echo area, then
+     ‘verbose’ forgoes doing so.  Use ‘force-verbose’ to echo even such
+     documentation.  Use ‘t’ to enable menu navigation without showing
+     documentation in the echo area.
 
      While a transient is active, the menu buffer is (by default) not
      the current buffer, making it necessary to use dedicated commands
@@ -758,16 +765,18 @@ Commands::.
 Accessibility Options
 ---------------------
 
-For blind users I recommend the following configuration.  If you need
-more guidance or would like to share your experience, please don't
-hesitate to contact me.
+For visually impaired users I recommend the following configuration.  If
+you need more guidance or would like to share your experience, please
+don't hesitate to contact me.
 
-     (setopt transient-enable-menu-navigation t) ; the default
-     (setopt transient-select-menu-window t)
-     (setopt transient-force-single-column t)
+     (setopt transient-enable-menu-navigation 'force-verbose)
      (setopt transient-navigate-to-group-descriptions t)
      (setopt transient-describe-menu t)
-     (add-hook 'transient-setup-buffer-hook 'ding)
+     (setopt transient-select-menu-window t)
+     (setopt transient-force-single-column t)
+     (setopt transient-prefer-reading-value t)
+     (setopt transient-use-accessible-values t)
+     (setopt transient-use-accessible-formats t)
 
    Additionally you have allow the command, which you use to read the
 text at point, to be run when a transient menu is active, for example:
@@ -775,25 +784,19 @@ text at point, to be run when a transient menu is active, for example:
      (define-key transient-predicate-map
        [my-read-text-at-point] #'transient--do-stay)
 
- -- User Option: transient-select-menu-window
-     This option controls whether the window displaying the transient
-     menu is automatically selected has soon as it is displayed.
-
-     Enabling this is discouraged, except for users of braille output
-     devises.  Note that enabling this, or alternatively selecting the
-     menu window on demand, are both unnecessary, to be able to move the
-     cursor in the menu.  See ‘transient-enable-menu-navigation’.
-
- -- User Option: transient-force-single-column
-     This option controls whether the use of a single column to display
-     suffixes is enforced.  This might be useful for users with low
-     vision who use large text and might otherwise have to scroll in two
-     dimensions.  This is also useful for blind users, because it causes
-     suffixes to be navigated in a more natural order.
+ -- User Option: transient-enable-menu-navigation
+     This option is documented in the previous node (*note Essential
+     Options::).  You might want to change the value from ‘verbose’ to
+     ‘force-verbose’, which causes information to be shown in the echo
+     area, even if it is identical to information already displayed in
+     the menu buffer.  Whether that is useful to you depends on whether
+     your setup makes it easy to read the last message displayed in the
+     echo area.
 
  -- User Option: transient-navigate-to-group-descriptions
      This option controls whether menu navigation commands stop at group
-     descriptions.
+     descriptions.  If your output method works by reading the text at
+     point, you most likely want to enable this.
 
      If ‘transient-enable-menu-navigation’ is non-‘nil’, which it is by
      default, ‘<UP>’ and ‘<DOWN>’ move from suffix to suffix.  When this
@@ -802,15 +805,104 @@ text at point, to be run when a transient menu is active, for example:
      devices to output the group title at point.
 
  -- User Option: transient-describe-menu
-     This option controls whether short description is inserted at the
-     beginning of the menu buffer.
+     This option controls whether a short description about the menu
+     itself is inserted at the beginning of the menu buffer.
 
      When this is non-‘nil’, then the menu buffer begins with a short
      description.  Ideally this is a string written exactly for that
      purpose, but because this is a new feature, most menu commands do
-     not provide that yet.  In that case the first line of its docstring
-     is used as fallback.  If the value is ‘docstring’, then the
-     docstring is used even if a description is available.
+     not provide that yet.  In that case the first line of the prefix
+     command's docstring is used as fallback.  If the value is
+     ‘docstring’, then the docstring is used even if a description is
+     available.
+
+ -- User Option: transient-select-menu-window
+     This option controls whether the window displaying the transient
+     menu is automatically selected as soon as it is displayed.
+
+     Enabling this is discouraged, except for users of braille and audio
+     output devises.  Note that enabling this, or alternatively
+     selecting the menu window on demand, are both unnecessary, to be
+     able to move the cursor in the menu.  See
+     ‘transient-enable-menu-navigation’.
+
+ -- User Option: transient-force-single-column
+     This option controls whether the use of a single column to display
+     suffixes is enforced.  This might be useful for users with low
+     vision who use large text and might otherwise have to scroll in two
+     dimensions.  This is also useful for blind users, because it causes
+     suffixes to be navigated in a more natural order, because often
+     related commands are displayed in the same column but navigation
+     first moves horizontally to the next item on the same row.
+
+ -- User Option: transient-prefer-reading-value
+     This option controls whether reading a new value is preferred over
+     other value selection methods.
+
+     If this is ‘nil’ (the default), then certain arguments are directly
+     disabled when they are invoked, while they have a non-‘nil’ value.
+     I.e., to switch from one non-‘nil’ value to another non-‘nil’
+     value, such commands have to be invoked twice.  For other
+     arguments, which happen to have a small set of possible values, all
+     values are displayed at all times, using solely coloring to
+     indicate which of the values is active.  When such an infix command
+     is invoked it cycles to the next value.
+
+     This default does not work for visually impaired user.  If this
+     option is non-‘nil’, then more arguments immediately read the new
+     value, instead of being toggled off on first invocation, or instead
+     of cycling through values.
+
+ -- User Option: transient-use-accessible-values
+     This option controls whether values are shown in a way that does
+     not rely on coloring.
+
+     If this is ‘nil’ (the default), then colors are used to communicate
+     the state of arguments.  For certain argument types the state is
+     solely communicated that way.  For example, an enabled command-line
+     switch is shown using some bright color, and disabling that
+     argument, changes the color to gray, without otherwise changing the
+     displayed text.
+
+     This default does not work for visually impaired user.  If this
+     option is non-‘nil’, then the state is additionally communicated
+     through other means.  A switch, for example, is either followed by
+     "is enabled" or "is disabled".  How exactly the state is
+     communicated depends on the type of the infix command.
+
+     Note that packages, which use Transient, can define their own infix
+     command types, which may or may not involve overriding Transient's
+     code, which honors this new option.  I.e., it will take some time
+     until everything respects this setting.
+
+ -- User Option: transient-use-accessible-formats
+     This option controls whether more accessible format strings are
+     used for menu elements.
+
+     If this is non-‘nil’, then menu elements are displayed in a way,
+     that I hope, is more suitable for visually impaired users than the
+     default.  Please provide feedback, so that we can together work on
+     improving this.
+
+     By default the format specified by an element's ‘format’ slot is
+     used.  When this is non-‘nil’, then the ‘accessible-format’ slot is
+     used instead.  One change implemented in the latter is that for an
+     element representing a command-line argument, the argument and its
+     value are moved before the description, giving quicker access to
+     the current state, while still allowing users to read the
+     description, in case they don't know yet what the argument in
+     question does.
+
+     Enabling this also causes the string "inapt" to be added at the
+     very beginning of the text describing a command that currently
+     cannot be used.  When using the default format, the only visual
+     clue that a command is inapt, is that the complete text
+     representing it is grayed out.  (As an example of such an inapt
+     command, consider the case of a commands that can only act on the
+     file at point, when there currently isn't a file at point.)
+     Placing the string "inapt" at the very beginning gives users the
+     opportunity to immediately skip over unusable commands, while still
+     giving them the opportunity to read on.
 
 Auxiliary Options
 -----------------
@@ -1374,6 +1466,8 @@ constructor of that class.
      ‘transient-column’ is used and a warning is displayed.  This
      warning will eventually be replaced with an error.
 
+          ;; -*- lexical-binding:t -*-
+          ;; Before evaluating this example, make sure `lexical-binding' is t.
           (transient-define-prefix my-finder-by-keyword ()
             "Select a keyword and list matching packages."
             ;; The real `finder-by-keyword' is more convenient
@@ -2677,12 +2771,35 @@ Slots of ‘transient-child’
 --------------------------
 
 This is the abstract superclass of ‘transient-suffix’ and
-‘transient-group’.  This is where the shared ‘if*’ and ‘inapt-if*’ slots
-(see *note Predicate Slots::), the ‘level’ slot (see *note Enabling and
-Disabling Suffixes::), and the ‘advice’ and ‘advice*’ slots (see *note
-Slots of transient-suffix::) are defined.
+‘transient-group’.  In addition to the slots listed below, this class is
+also where the ‘if*’ and ‘inapt-if*’ slots (see *note Predicate Slots::)
+and the ‘level’ slot (see *note Enabling and Disabling Suffixes::) are
+defined.
 
-   • ‘parent’ The object for the parent group.
+   • ‘parent’ The object for the parent group, if any.
+
+   • ‘inactive’ If an ‘:if*’ predicate of a suffix or group returns
+     ‘nil’, then it is not displayed in the menu, but it has to remain
+     in the internal object tree, in case that predicate later returns
+     ‘t’, and the ‘object’ therefore has to appear in the menu again.
+     Likewise a group or suffix may be (potentially only temporarily)
+     inactive due to its ‘level’.  The ‘inactive’ slot is set
+     accordingly.  Never set it yourself.
+
+   The following two slots are experimental.  If they are set for a
+group, then they apply to all suffixes in that group, except for
+suffixes that themselves set the same slot to a non-‘nil’ value.
+
+   • ‘advice’ A function used to advise the command.  The advise is
+     called using ‘(apply advice command args)’, i.e., it behaves like
+     an "around" advice.
+
+   • ‘advice*’ A function used to advise the command.  Unlike ‘advice’,
+     this advises not only the command body but also its ‘interactive’
+     spec.  If both slots are non-‘nil’, ‘advice’ is used for the body
+     and ‘advice*’ is used for the ‘interactive’ form.  When advising
+     the ‘interactive’ spec, called using ‘(funcall advice
+     #'advice-eval-interactive-spec spec)’.
 
 Slots of ‘transient-suffix’
 ---------------------------
@@ -2724,28 +2841,21 @@ Slots of ‘transient-suffix’
      unspecified, the prefix controls how help is displayed for its
      suffixes.  See also function ‘transient-show-help’.
 
-   • ‘summary’ The summary displayed in the echo area, or as a tooltip.
-     If this is ‘nil’, which it usually should be, the first line of the
-     documentation string is used instead.  See ‘transient-show-summary’
-     for details.
+   • ‘summary’ A short description to be displayed in addition to the
+     text displayed in the menu itself.  If this is ‘nil’, the first
+     line of the documentation string is used instead.  If non-‘nil’,
+     this must be a string or a function that returns a string or ‘nil’.
+
+     This description is displayed as a tooltip, when hovering an
+     element in the menu.  If ‘transient-enable-menu-navigation’ is
+     ‘verbose’, it is also shown in the echo area, when navigating the
+     menu.
+
+     The generic function ‘transient-get-summary’ is used to determine
+     and format this description.
 
    • ‘definition’ A command, which is used if the body is omitted when
      defining a command using ‘transient-define-suffix’.
-
-   The following two slots are experimental.  They can also be set for a
-group, in which case they apply to all suffixes in that group, except
-for suffixes that set the same slot to a non-‘nil’ value.
-
-   • ‘advice’ A function used to advise the command.  The advise is
-     called using ‘(apply advice command args)’, i.e., it behaves like
-     an "around" advice.
-
-   • ‘advice*’ A function used to advise the command.  Unlike ‘advice’,
-     this advises not only the command body but also its ‘interactive’
-     spec.  If both slots are non-‘nil’, ‘advice’ is used for the body
-     and ‘advice*’ is used for the ‘interactive’ form.  When advising
-     the ‘interactive’ spec, called using ‘(funcall advice
-     #'advice-eval-interactive-spec spec)’.
 
 Slots of ‘transient-infix’
 --------------------------
@@ -2756,6 +2866,16 @@ They are defined here anyway to allow sharing certain methods.
    • ‘argument’ The long argument, e.g., ‘--verbose’.
 
    • ‘shortarg’ The short argument, e.g., ‘-v’.
+
+   • ‘claim-argument’ Whether to claim matched arguments exclusively,
+     i.e., whether to prevent other "overlapping" infixes from also
+     matching.
+
+     For example, consider the suffix arguments
+     ‘--push-option=known=<val>’ and ‘--push-option=<arbitrary>’.
+     Unless the former claims any matched value exclusively (and appears
+     before the latter in the menu), the latter also matches, which
+     would lead to undesirable behavior.
 
    • ‘value’ The value.  Should not be accessed directly.
 
@@ -2901,18 +3021,17 @@ basis by passing ‘:display-action’ to ‘transient-define-prefix’.
 A.2 How can I copy text from the menu buffer?
 =============================================
 
-To be able to mark text in Transient's menu buffer using the mouse, you
-have to add the below binding.  Note that for technical reasons, the
-region won't be visualized, while doing so.  After you have quit the
-transient menu, you will be able to yank it in another buffer.
+You can select text in the menu buffer using the mouse, like in most
+other buffers, by clicking ‘mouse-1’ and keeping it pressed while
+dragging.
 
-     (keymap-set transient-predicate-map
-                 "<mouse-set-region>"
-                 #'transient--do-stay)
+   (Before v0.13.0, the above required additional configuration and the
+region was not visualized while dragging.  This isn't the case anymore,
+but explains why the following was once deemed necessary.)
 
-   Copying the region while not seeing the region is a bit fiddly, so a
-dedicated command, ‘transient-copy-menu-text’, was added.  You have to
-add a binding for this command in ‘transient-map’.
+   Alternatively the command ‘transient-copy-menu-text’ can be used to
+copy the complete content of the menu buffer.  You have to add a binding
+for this command in ‘transient-map’.
 
      (keymap-set transient-map "C-c C-w" #'transient-copy-menu-text)
 
@@ -2920,9 +3039,9 @@ A.3 How can I autoload prefix and suffix commands?
 ==================================================
 
 If your package only supports Emacs 30, just prefix the definition with
-‘;;;###autoload’.  If your package supports released versions of Emacs,
-you unfortunately have to use a long form autoload comment as described
-in *note (elisp)Autoload::.
+‘;;;###autoload’.  If your package supports older Emacs releases, you
+unfortunately have to use a long-form autoload comment as described in
+*note (elisp)Autoload::.
 
      ;;;###autoload (autoload 'magit-dispatch "magit" nil t)
      (transient-define-prefix magit-dispatch ()
@@ -3113,7 +3232,7 @@ Appendix D Variable Index
  [index ]
 * Menu:
 
-* transient-align-variable-pitch:        Configuration.       (line 289)
+* transient-align-variable-pitch:        Configuration.       (line 381)
 * transient-common-command-prefix:       Common Suffix Commands.
                                                               (line  23)
 * transient-current-command:             Current Prefix Command.
@@ -3124,33 +3243,37 @@ Appendix D Variable Index
                                                               (line  45)
 * transient-default-level:               Enabling and Disabling Suffixes.
                                                               (line  33)
-* transient-describe-menu:               Configuration.       (line 197)
-* transient-detect-key-conflicts:        Configuration.       (line 314)
-* transient-display-buffer-action:       Configuration.       (line 106)
+* transient-describe-menu:               Configuration.       (line 200)
+* transient-detect-key-conflicts:        Configuration.       (line 406)
+* transient-display-buffer-action:       Configuration.       (line 113)
 * transient-enable-menu-navigation:      Configuration.       (line  81)
-* transient-error-on-insert-failure:     Configuration.       (line 327)
-* transient-exit-hook:                   Configuration.       (line 346)
-* transient-force-fixed-pitch:           Configuration.       (line 302)
-* transient-force-single-column:         Configuration.       (line 180)
-* transient-highlight-higher-levels:     Configuration.       (line 333)
-* transient-highlight-mismatched-keys:   Configuration.       (line 247)
+* transient-enable-menu-navigation <1>:  Configuration.       (line 180)
+* transient-error-on-insert-failure:     Configuration.       (line 419)
+* transient-exit-hook:                   Configuration.       (line 438)
+* transient-force-fixed-pitch:           Configuration.       (line 394)
+* transient-force-single-column:         Configuration.       (line 222)
+* transient-highlight-higher-levels:     Configuration.       (line 425)
+* transient-highlight-mismatched-keys:   Configuration.       (line 339)
 * transient-history-file:                Using History.       (line  41)
 * transient-history-limit:               Using History.       (line  45)
 * transient-levels-file:                 Enabling and Disabling Suffixes.
                                                               (line  38)
-* transient-mode-line-format:            Configuration.       (line 211)
-* transient-navigate-to-group-descriptions: Configuration.    (line 187)
-* transient-post-exit-hook:              Configuration.       (line 350)
+* transient-mode-line-format:            Configuration.       (line 303)
+* transient-navigate-to-group-descriptions: Configuration.    (line 189)
+* transient-post-exit-hook:              Configuration.       (line 442)
+* transient-prefer-reading-value:        Configuration.       (line 231)
 * transient-read-with-initial-input:     Configuration.       (line  74)
 * transient-save-history:                Using History.       (line  37)
-* transient-select-menu-window:          Configuration.       (line 171)
-* transient-semantic-coloring:           Configuration.       (line 238)
-* transient-setup-buffer-hook:           Configuration.       (line 354)
+* transient-select-menu-window:          Configuration.       (line 212)
+* transient-semantic-coloring:           Configuration.       (line 330)
+* transient-setup-buffer-hook:           Configuration.       (line 446)
 * transient-show-common-commands:        Common Suffix Commands.
                                                               (line  11)
 * transient-show-during-minibuffer-read: Configuration.       (line  37)
 * transient-show-menu:                   Configuration.       (line  16)
-* transient-substitute-key-function:     Configuration.       (line 268)
+* transient-substitute-key-function:     Configuration.       (line 360)
+* transient-use-accessible-formats:      Configuration.       (line 271)
+* transient-use-accessible-values:       Configuration.       (line 249)
 * transient-values-file:                 Saving Values.       (line  36)
 
 
@@ -3193,7 +3316,7 @@ Appendix E Concept Index
 * saving values of arguments:            Saving Values.       (line   6)
 * scope of a transient:                  Defining Transients. (line  43)
 * suffix specifications:                 Binding Suffix and Infix Commands.
-                                                              (line 162)
+                                                              (line 164)
 * transient state:                       Transient State.     (line   6)
 * transient-level:                       Enabling and Disabling Suffixes.
                                                               (line  15)
@@ -3934,61 +4057,61 @@ Node: Enabling and Disabling Suffixes18733
 Node: Other Commands24087
 Node: Configuration25765
 Ref: Essential Options26045
-Ref: Accessibility Options32759
-Ref: Auxiliary Options35434
-Ref: Developer Options40085
-Ref: Hook Variables41610
-Node: Modifying Existing Transients42138
-Node: Defining New Commands48005
-Node: Technical Introduction48445
-Node: Defining Transients54136
-Node: Binding Suffix and Infix Commands57479
-Ref: Group Specifications58270
-Ref: Suffix Specifications65077
-Node: Defining Suffix and Infix Commands69975
-Node: Using Infix Arguments73011
-Node: Using Prefix Scope76039
-Node: Current Suffix Command78075
-Node: Current Prefix Command80432
-Node: Transient State82984
-Ref: Pre-commands for Infixes87287
-Ref: Pre-commands for Suffixes87803
-Ref: Pre-commands for Non-Suffixes90252
-Ref: Special Pre-Commands91388
-Node: Classes and Methods91896
-Node: Group Classes93983
-Node: Group Methods95896
-Node: Prefix Classes97155
-Node: Suffix Classes97996
-Node: Prefix Methods102790
-Node: Suffix Methods106011
-Ref: Suffix Value Methods106271
-Ref: Suffix Format Methods109510
-Node: Prefix Slots112391
-Ref: Value and Scope112541
-Ref: Behavior115529
-Ref: Appearance116870
-Ref: Documentation117554
-Ref: Internal118449
-Node: Suffix Slots119800
-Ref: Slots of transient-child120168
-Ref: Slots of transient-suffix120626
-Ref: Slots of transient-infix123489
-Ref: Slots of transient-variable126777
-Ref: Slots of transient-switches126879
-Node: Predicate Slots127242
-Node: FAQ129579
-Ref: Can I control how the menu buffer is displayed?129708
-Ref: How can I copy text from the menu buffer?130032
-Ref: How can I autoload prefix and suffix commands?130791
-Ref: How does Transient compare to prefix keys and universal arguments?131265
-Ref: How does Transient compare to Magit-Popup and Hydra?131508
-Ref: Why does q not quit popups anymore?131702
-Node: Keystroke Index132803
-Node: Command and Function Index134668
-Node: Variable Index142135
-Node: Concept Index145133
-Node: GNU General Public License147957
+Ref: Accessibility Options33171
+Ref: Auxiliary Options40412
+Ref: Developer Options45063
+Ref: Hook Variables46588
+Node: Modifying Existing Transients47116
+Node: Defining New Commands52983
+Node: Technical Introduction53423
+Node: Defining Transients59114
+Node: Binding Suffix and Infix Commands62457
+Ref: Group Specifications63248
+Ref: Suffix Specifications70173
+Node: Defining Suffix and Infix Commands75071
+Node: Using Infix Arguments78107
+Node: Using Prefix Scope81135
+Node: Current Suffix Command83171
+Node: Current Prefix Command85528
+Node: Transient State88080
+Ref: Pre-commands for Infixes92383
+Ref: Pre-commands for Suffixes92899
+Ref: Pre-commands for Non-Suffixes95348
+Ref: Special Pre-Commands96484
+Node: Classes and Methods96992
+Node: Group Classes99079
+Node: Group Methods100992
+Node: Prefix Classes102251
+Node: Suffix Classes103092
+Node: Prefix Methods107886
+Node: Suffix Methods111107
+Ref: Suffix Value Methods111367
+Ref: Suffix Format Methods114606
+Node: Prefix Slots117487
+Ref: Value and Scope117637
+Ref: Behavior120625
+Ref: Appearance121966
+Ref: Documentation122650
+Ref: Internal123545
+Node: Suffix Slots124896
+Ref: Slots of transient-child125264
+Ref: Slots of transient-suffix126979
+Ref: Slots of transient-infix129420
+Ref: Slots of transient-variable133173
+Ref: Slots of transient-switches133275
+Node: Predicate Slots133638
+Node: FAQ135975
+Ref: Can I control how the menu buffer is displayed?136104
+Ref: How can I copy text from the menu buffer?136428
+Ref: How can I autoload prefix and suffix commands?137135
+Ref: How does Transient compare to prefix keys and universal arguments?137603
+Ref: How does Transient compare to Magit-Popup and Hydra?137846
+Ref: Why does q not quit popups anymore?138040
+Node: Keystroke Index139141
+Node: Command and Function Index141006
+Node: Variable Index148473
+Node: Concept Index151763
+Node: GNU General Public License154587
 
 End Tag Table
 

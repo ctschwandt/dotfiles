@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/elpaca/elpaca-log.el
+/home/ctschwandt/.config/emacs/elpaca/sources/elpaca/elpaca-log.el

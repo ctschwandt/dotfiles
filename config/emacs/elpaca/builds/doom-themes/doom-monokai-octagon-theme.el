@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/themes/themes/doom-monokai-octagon-theme.el
+/home/ctschwandt/.config/emacs/elpaca/sources/themes/themes/doom-monokai-octagon-theme.el

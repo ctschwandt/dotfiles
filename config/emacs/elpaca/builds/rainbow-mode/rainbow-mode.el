@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/rainbow-mode/rainbow-mode.el
+/home/ctschwandt/.config/emacs/elpaca/sources/rainbow-mode/rainbow-mode.el

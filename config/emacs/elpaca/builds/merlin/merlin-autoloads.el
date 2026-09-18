@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from merlin.el
 
-(autoload 'merlin-mode "merlin" "\
-Minor mode for interacting with a merlin process.
+(autoload 'merlin-mode "merlin"
+"Minor mode for interacting with a merlin process.
 
 Runs a merlin process in the background and perform queries on it.
 
@@ -42,15 +42,15 @@ disabled.
 
 ;;; Generated autoloads from merlin-imenu.el
 
-(autoload 'merlin-use-merlin-imenu "merlin-imenu" "\
-Merlin: use the custom imenu feature from Merlin" t)
+(autoload 'merlin-use-merlin-imenu "merlin-imenu"
+"Merlin: use the custom imenu feature from Merlin" t)
 (register-definition-prefixes "merlin-imenu" '("merlin-imenu-"))
 
 
 ;;; Generated autoloads from merlin-xref.el
 
-(autoload 'merlin-xref-backend "merlin-xref" "\
-Merlin backend for Xref.")
+(autoload 'merlin-xref-backend "merlin-xref"
+"Merlin backend for Xref.")
 (register-definition-prefixes "merlin-xref" '("merlin-xref--"))
 
 ;;; End of scraped data

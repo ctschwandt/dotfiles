@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defconst dt/emacs-dir user-emacs-directory
   "Root of this Emacs config.")
 

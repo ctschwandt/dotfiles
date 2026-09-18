@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from app-launcher.el
 
-(autoload 'app-launcher-run-app "app-launcher" "\
-Launch an application installed on your machine.
+(autoload 'app-launcher-run-app "app-launcher"
+"Launch an application installed on your machine.
 When ARG is non-nil, ignore NoDisplay property in *.desktop files.
 
 (fn &optional ARG)" t)

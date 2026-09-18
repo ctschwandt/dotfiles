@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from peep-dired.el
 
-(autoload 'peep-dired "peep-dired" "\
-A convienent way to look up file contents in other window while browsing directory in dired
+(autoload 'peep-dired "peep-dired"
+"A convienent way to look up file contents in other window while browsing directory in dired
 
 This is a minor mode.  If called interactively, toggle the `Peep-Dired
 mode' mode.  If the prefix argument is positive, enable the mode, and if

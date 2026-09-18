@@ -9,14 +9,14 @@
 
 ;;; Generated autoloads from tldr.el
 
-(autoload 'tldr-update-docs "tldr" "\
-Get or update the TLDR docs from source." t)
-(autoload 'tldr "tldr" "\
-Lookup TLDR docs.
+(autoload 'tldr-update-docs "tldr"
+"Get or update the TLDR docs from source." t)
+(autoload 'tldr "tldr"
+"Lookup TLDR docs.
 
 (fn &optional CMD)" t)
-(autoload 'helm-tldr "tldr" "\
-Helm interface for `tldr'." t)
+(autoload 'helm-tldr "tldr"
+"Helm interface for `tldr'." t)
 (register-definition-prefixes "tldr" '("tldr-"))
 
 ;;; End of scraped data

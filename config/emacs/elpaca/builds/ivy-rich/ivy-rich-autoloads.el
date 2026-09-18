@@ -9,16 +9,16 @@
 
 ;;; Generated autoloads from ivy-rich.el
 
-(defvar ivy-rich-mode nil "\
-Non-nil if Ivy-Rich mode is enabled.
+(defvar ivy-rich-mode nil
+"Non-nil if Ivy-Rich mode is enabled.
 See the `ivy-rich-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `ivy-rich-mode'.")
 (custom-autoload 'ivy-rich-mode "ivy-rich" nil)
-(autoload 'ivy-rich-mode "ivy-rich" "\
-Toggle ivy-rich mode globally.
+(autoload 'ivy-rich-mode "ivy-rich"
+"Toggle ivy-rich mode globally.
 
 This is a global minor mode.  If called interactively, toggle the
 `Ivy-Rich mode' mode.  If the prefix argument is positive, enable the
@@ -36,16 +36,16 @@ disabled.
 
 (fn &optional ARG)" t)
 (autoload 'ivy-rich-reload "ivy-rich")
-(defvar ivy-rich-project-root-cache-mode nil "\
-Non-nil if Ivy-Rich-Project-Root-Cache mode is enabled.
+(defvar ivy-rich-project-root-cache-mode nil
+"Non-nil if Ivy-Rich-Project-Root-Cache mode is enabled.
 See the `ivy-rich-project-root-cache-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `ivy-rich-project-root-cache-mode'.")
 (custom-autoload 'ivy-rich-project-root-cache-mode "ivy-rich" nil)
-(autoload 'ivy-rich-project-root-cache-mode "ivy-rich" "\
-Toggle ivy-rich-root-cache-mode globally.
+(autoload 'ivy-rich-project-root-cache-mode "ivy-rich"
+"Toggle ivy-rich-root-cache-mode globally.
 
 This is a global minor mode.  If called interactively, toggle the
 `Ivy-Rich-Project-Root-Cache mode' mode.  If the prefix argument is

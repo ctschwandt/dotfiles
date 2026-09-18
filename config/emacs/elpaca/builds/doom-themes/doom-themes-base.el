@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/themes/doom-themes-base.el
+/home/ctschwandt/.config/emacs/elpaca/sources/themes/doom-themes-base.el

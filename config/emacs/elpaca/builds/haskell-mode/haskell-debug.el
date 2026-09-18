@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/haskell-debug.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/haskell-debug.el

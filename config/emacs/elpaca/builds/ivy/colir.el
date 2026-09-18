@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/swiper/colir.el
+/home/ctschwandt/.config/emacs/elpaca/sources/swiper/colir.el

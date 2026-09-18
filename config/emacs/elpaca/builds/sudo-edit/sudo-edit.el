@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/sudo-edit/sudo-edit.el
+/home/ctschwandt/.config/emacs/elpaca/sources/sudo-edit/sudo-edit.el

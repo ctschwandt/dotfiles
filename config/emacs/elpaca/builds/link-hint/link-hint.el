@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/link-hint/link-hint.el
+/home/ctschwandt/.config/emacs/elpaca/sources/link-hint/link-hint.el

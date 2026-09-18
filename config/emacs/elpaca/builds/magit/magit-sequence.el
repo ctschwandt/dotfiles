@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/magit/lisp/magit-sequence.el
+/home/ctschwandt/.config/emacs/elpaca/sources/magit/lisp/magit-sequence.el

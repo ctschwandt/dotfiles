@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/queue/queue.el
+/home/ctschwandt/.config/emacs/elpaca/sources/queue/queue.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/emacs-libvterm/vterm.el
+/home/ctschwandt/.config/emacs/elpaca/sources/emacs-libvterm/vterm.el

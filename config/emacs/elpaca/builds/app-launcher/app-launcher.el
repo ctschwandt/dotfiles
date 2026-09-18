@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/app-launcher/app-launcher.el
+/home/ctschwandt/.config/emacs/elpaca/sources/app-launcher/app-launcher.el

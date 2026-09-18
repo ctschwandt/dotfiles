@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from evil-collection.el
 
-(autoload 'evil-collection-translate-minor-mode-key "evil-collection" "\
-Translate keys in the keymap(s) corresponding to STATES and MODES.
+(autoload 'evil-collection-translate-minor-mode-key "evil-collection"
+"Translate keys in the keymap(s) corresponding to STATES and MODES.
 
 Similar to `evil-collection-translate-key' but for minor modes.
 STATES should be the name of an evil state, a list of states, or nil. MODES
@@ -30,8 +30,8 @@ invocation.
 
 (fn STATES MODES &rest TRANSLATIONS &key DESTRUCTIVE &allow-other-keys)")
 (function-put 'evil-collection-translate-minor-mode-key 'lisp-indent-function 'defun)
-(autoload 'evil-collection-translate-key "evil-collection" "\
-Translate keys in the keymap(s) corresponding to STATES and KEYMAPS.
+(autoload 'evil-collection-translate-key "evil-collection"
+"Translate keys in the keymap(s) corresponding to STATES and KEYMAPS.
 STATES should be the name of an evil state, a list of states, or nil. KEYMAPS
 should be a symbol corresponding to the keymap to make the translations in or a
 list of keymap symbols. Like `evil-define-key', when a keymap does not exist,
@@ -51,17 +51,16 @@ invocation.
 
 (fn STATES KEYMAPS &rest TRANSLATIONS &key DESTRUCTIVE &allow-other-keys)")
 (function-put 'evil-collection-translate-key 'lisp-indent-function 'defun)
-(autoload 'evil-collection-swap-key "evil-collection" "\
-Wrapper around `evil-collection-translate-key' for swapping keys.
+(autoload 'evil-collection-swap-key "evil-collection"
+"Wrapper around `evil-collection-translate-key' for swapping keys.
 STATES, KEYMAPS, and ARGS are passed to `evil-collection-translate-key'. ARGS
 should consist of key swaps (e.g. \"a\" \"b\" is equivalent to \"a\" \"b\" \"b\"
 \"a\" with `evil-collection-translate-key') and optionally keyword arguments for
 `evil-collection-translate-key'.
 
 (fn STATES KEYMAPS &rest ARGS)" nil t)
-(function-put 'evil-collection-swap-key 'lisp-indent-function 'defun)
-(autoload 'evil-collection-swap-minor-mode-key "evil-collection" "\
-Wrapper around `evil-collection-translate-minor-mode-key' for swapping keys.
+(autoload 'evil-collection-swap-minor-mode-key "evil-collection"
+"Wrapper around `evil-collection-translate-minor-mode-key' for swapping keys.
 STATES, MODES, and ARGS are passed to
 `evil-collection-translate-minor-mode-key'. ARGS should consist of key swaps
 (e.g. \"a\" \"b\" is equivalent to \"a\" \"b\" \"b\" \"a\"
@@ -69,17 +68,16 @@ with `evil-collection-translate-minor-mode-key') and optionally keyword
 arguments for `evil-collection-translate-minor-mode-key'.
 
 (fn STATES MODES &rest ARGS)" nil t)
-(function-put 'evil-collection-swap-minor-mode-key 'lisp-indent-function 'defun)
-(autoload 'evil-collection-require "evil-collection" "\
-Require the evil-collection-MODE file, but do not activate it.
+(autoload 'evil-collection-require "evil-collection"
+"Require the evil-collection-MODE file, but do not activate it.
 
 MODE should be a symbol. This requires the evil-collection-MODE
 feature without needing to manipulate `load-path'. NOERROR is
 forwarded to `require'.
 
 (fn MODE &optional NOERROR)")
-(autoload 'evil-collection-init "evil-collection" "\
-Register the Evil bindings for all modes in `evil-collection-mode-list'.
+(autoload 'evil-collection-init "evil-collection"
+"Register the Evil bindings for all modes in `evil-collection-mode-list'.
 
 Alternatively, you may register select bindings manually, for
 instance:
@@ -91,6 +89,36 @@ If MODES is specified (as either one mode or a list of modes), use those modes
 instead of the modes in `evil-collection-mode-list'.
 
 (fn &optional MODES)" t)
+(autoload 'evil-collection-unmap "evil-collection"
+"Completely unmap THINGS from MAP-SYM.
+
+MAP-SYM is a symbol bound to a keymap. If MAP-SYM is not yet bound
+to a keymap, the operation is deferred via `after-load-functions',
+matching the deferral behaviour of `evil-collection-define-key'.
+
+Each thing in THINGS is one of:
+
+  - A command symbol — every binding pointing to that command
+    anywhere in the keymap is removed (TAB, RET, C-c TAB,
+    evil-state bindings, [remap ...] entries, etc.).
+
+  - A key description string accepted by `kbd' (e.g. \"RET\",
+    \"a\", \"<return>\", \"TAB\", \"C-c C-c\") — the binding at
+    that exact key sequence is removed at the top level and
+    inside every evil-state auxiliary keymap.
+
+  - A key vector — same as a key description, already parsed.
+
+Removals use `define-key' with REMOVE set, so bindings are
+deleted entirely, not just shadowed with nil.
+
+Parent keymaps installed via `set-keymap-parent' are not modified,
+and sub-keymaps stored under events in
+`evil-collection-unmap-skip-events' (menu-bar, tool-bar, etc.) are
+not descended into.
+
+(fn MAP-SYM &rest THINGS)")
+(function-put 'evil-collection-unmap 'lisp-indent-function 'defun)
 (register-definition-prefixes "evil-collection" '("evil-collection-"))
 
 ;;; End of scraped data

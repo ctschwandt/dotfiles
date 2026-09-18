@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from ocamlformat.el
 
-(autoload 'ocamlformat-before-save "ocamlformat" "\
-Add this to .emacs to run ocamlformat on the current buffer when saving:
+(autoload 'ocamlformat-before-save "ocamlformat"
+"Add this to .emacs to run ocamlformat on the current buffer when saving:
 
 (add-hook \\='before-save-hook \\='ocamlformat-before-save)." t)
 (register-definition-prefixes "ocamlformat" '("ocamlformat"))

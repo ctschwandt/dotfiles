@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/rainbow-delimiters/rainbow-delimiters.el
+/home/ctschwandt/.config/emacs/elpaca/sources/rainbow-delimiters/rainbow-delimiters.el

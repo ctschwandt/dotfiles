@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/haskell-hoogle.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/haskell-hoogle.el

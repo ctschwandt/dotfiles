@@ -9,12 +9,12 @@
 
 ;;; Generated autoloads from git-timemachine.el
 
-(autoload 'git-timemachine-toggle "git-timemachine" "\
-Toggle git timemachine mode." t)
-(autoload 'git-timemachine "git-timemachine" "\
-Enable git timemachine for file of current buffer." t)
-(autoload 'git-timemachine-switch-branch "git-timemachine" "\
-Enable git timemachine for current buffer, switching to GIT-BRANCH.
+(autoload 'git-timemachine-toggle "git-timemachine"
+"Toggle git timemachine mode." t)
+(autoload 'git-timemachine "git-timemachine"
+"Enable git timemachine for file of current buffer." t)
+(autoload 'git-timemachine-switch-branch "git-timemachine"
+"Enable git timemachine for current buffer, switching to GIT-BRANCH.
 
 (fn GIT-BRANCH)" t)
 (register-definition-prefixes "git-timemachine" '("git-timemachine-"))

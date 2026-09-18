@@ -9,32 +9,32 @@
 
 ;;; Generated autoloads from swiper.el
 
-(autoload 'swiper-avy "swiper" "\
-Jump to one of the current swiper candidates with `avy'." t)
-(autoload 'swiper-backward "swiper" "\
-`isearch-backward' with an overview.
+(autoload 'swiper-avy "swiper"
+"Jump to one of the current swiper candidates with `avy'." t)
+(autoload 'swiper-backward "swiper"
+"`isearch-backward' with an overview.
 When non-nil, INITIAL-INPUT is the initial search pattern.
 
 (fn &optional INITIAL-INPUT)" t)
-(autoload 'swiper-thing-at-point "swiper" "\
-`swiper' with `ivy-thing-at-point'." t)
-(autoload 'swiper-all-thing-at-point "swiper" "\
-`swiper-all' with `ivy-thing-at-point'." t)
-(autoload 'swiper "swiper" "\
-`isearch-forward' with an overview.
+(autoload 'swiper-thing-at-point "swiper"
+"`swiper' with `ivy-thing-at-point'." t)
+(autoload 'swiper-all-thing-at-point "swiper"
+"`swiper-all' with `ivy-thing-at-point'." t)
+(autoload 'swiper "swiper"
+"`isearch-forward' with an overview.
 When non-nil, INITIAL-INPUT is the initial search pattern.
 
 (fn &optional INITIAL-INPUT)" t)
-(autoload 'swiper-all "swiper" "\
-Run `swiper' for all open buffers.
+(autoload 'swiper-all "swiper"
+"Run `swiper' for all open buffers.
 
 (fn &optional INITIAL-INPUT)" t)
-(autoload 'swiper-isearch "swiper" "\
-A `swiper' that's not line-based.
+(autoload 'swiper-isearch "swiper"
+"A `swiper' that's not line-based.
 
 (fn &optional INITIAL-INPUT)" t)
-(autoload 'swiper-isearch-backward "swiper" "\
-Like `swiper-isearch' but the first result is before the point.
+(autoload 'swiper-isearch-backward "swiper"
+"Like `swiper-isearch' but the first result is before the point.
 
 (fn &optional INITIAL-INPUT)" t)
 (register-definition-prefixes "swiper" '("swiper-"))

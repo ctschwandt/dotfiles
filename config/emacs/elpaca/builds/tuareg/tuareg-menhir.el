@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/tuareg/tuareg-menhir.el
+/home/ctschwandt/.config/emacs/elpaca/sources/tuareg/tuareg-menhir.el

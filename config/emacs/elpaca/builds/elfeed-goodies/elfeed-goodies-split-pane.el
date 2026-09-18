@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/elfeed-goodies/elfeed-goodies-split-pane.el
+/home/ctschwandt/.config/emacs/elpaca/sources/elfeed-goodies/elfeed-goodies-split-pane.el

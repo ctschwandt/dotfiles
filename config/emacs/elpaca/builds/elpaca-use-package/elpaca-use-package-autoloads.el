@@ -9,16 +9,16 @@
 
 ;;; Generated autoloads from elpaca-use-package.el
 
-(defvar elpaca-use-package-mode nil "\
-Non-nil if Elpaca-Use-Package mode is enabled.
+(defvar elpaca-use-package-mode nil
+"Non-nil if Elpaca-Use-Package mode is enabled.
 See the `elpaca-use-package-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `elpaca-use-package-mode'.")
 (custom-autoload 'elpaca-use-package-mode "elpaca-use-package" nil)
-(autoload 'elpaca-use-package-mode "elpaca-use-package" "\
-Minor mode to enable Elpaca support for `use-package'.
+(autoload 'elpaca-use-package-mode "elpaca-use-package"
+"Minor mode to enable Elpaca support for `use-package'.
 
 This is a global minor mode.  If called interactively, toggle the
 `Elpaca-Use-Package mode' mode.  If the prefix argument is positive,

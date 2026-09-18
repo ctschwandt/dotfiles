@@ -349,36 +349,36 @@
 
 ;;; Generated autoloads from doom-themes.el
 
-(autoload 'doom-name-to-rgb "doom-themes" "\
-Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
+(autoload 'doom-name-to-rgb "doom-themes"
+"Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
 for FRAME (defaults to the current frame).
 
 (fn COLOR)")
-(autoload 'doom-blend "doom-themes" "\
-Blend two colors (hexidecimal strings) together by a coefficient ALPHA (a
+(autoload 'doom-blend "doom-themes"
+"Blend two colors (hexidecimal strings) together by a coefficient ALPHA (a
 float between 0 and 1)
 
 (fn COLOR1 COLOR2 ALPHA)")
-(autoload 'doom-darken "doom-themes" "\
-Darken a COLOR (a hexidecimal string) by a coefficient ALPHA (a float between
+(autoload 'doom-darken "doom-themes"
+"Darken a COLOR (a hexidecimal string) by a coefficient ALPHA (a float between
 0 and 1).
 
 (fn COLOR ALPHA)")
-(autoload 'doom-lighten "doom-themes" "\
-Brighten a COLOR (a hexidecimal string) by a coefficient ALPHA (a float
+(autoload 'doom-lighten "doom-themes"
+"Brighten a COLOR (a hexidecimal string) by a coefficient ALPHA (a float
 between 0 and 1).
 
 (fn COLOR ALPHA)")
-(autoload 'doom-color "doom-themes" "\
-Retrieve a specific color named NAME (a symbol) from the current theme.
+(autoload 'doom-color "doom-themes"
+"Retrieve a specific color named NAME (a symbol) from the current theme.
 
 (fn NAME &optional TYPE)")
-(autoload 'doom-ref "doom-themes" "\
-TODO
+(autoload 'doom-ref "doom-themes"
+"TODO
 
 (fn FACE PROP &optional CLASS)")
-(autoload 'doom-themes-set-faces "doom-themes" "\
-Customize THEME (a symbol) with FACES.
+(autoload 'doom-themes-set-faces "doom-themes"
+"Customize THEME (a symbol) with FACES.
 
 If THEME is nil, it applies to all themes you load. FACES is a list of Doom
 theme face specs. These is a simplified spec. For example:
@@ -403,8 +403,8 @@ theme face specs. These is a simplified spec. For example:
 
 ;;; Generated autoloads from doom-themes-ext-neotree.el
 
-(autoload 'doom-themes-neotree-config "doom-themes-ext-neotree" "\
-Install doom-themes' neotree configuration.
+(autoload 'doom-themes-neotree-config "doom-themes-ext-neotree"
+"Install doom-themes' neotree configuration.
 
 Includes an Atom-esque icon theme and highlighting based on filetype.")
 (register-definition-prefixes "doom-themes-ext-neotree" '("doom-"))
@@ -412,15 +412,15 @@ Includes an Atom-esque icon theme and highlighting based on filetype.")
 
 ;;; Generated autoloads from doom-themes-ext-org.el
 
-(autoload 'doom-themes-org-config "doom-themes-ext-org" "\
-Load `doom-themes-ext-org'.")
+(autoload 'doom-themes-org-config "doom-themes-ext-org"
+"Load `doom-themes-ext-org'.")
 (register-definition-prefixes "doom-themes-ext-org" '("doom-themes-"))
 
 
 ;;; Generated autoloads from doom-themes-ext-treemacs.el
 
-(autoload 'doom-themes-treemacs-config "doom-themes-ext-treemacs" "\
-Install doom-themes' treemacs configuration.
+(autoload 'doom-themes-treemacs-config "doom-themes-ext-treemacs"
+"Install doom-themes' treemacs configuration.
 
 Includes an Atom-esque icon theme and highlighting based on filetype.")
 (register-definition-prefixes "doom-themes-ext-treemacs" '("doom-themes-"))
@@ -428,10 +428,10 @@ Includes an Atom-esque icon theme and highlighting based on filetype.")
 
 ;;; Generated autoloads from doom-themes-ext-visual-bell.el
 
-(autoload 'doom-themes-visual-bell-fn "doom-themes-ext-visual-bell" "\
-Blink the mode-line red briefly. Set `ring-bell-function' to this to use it.")
-(autoload 'doom-themes-visual-bell-config "doom-themes-ext-visual-bell" "\
-Enable flashing the mode-line on error.")
+(autoload 'doom-themes-visual-bell-fn "doom-themes-ext-visual-bell"
+"Blink the mode-line red briefly. Set `ring-bell-function' to this to use it.")
+(autoload 'doom-themes-visual-bell-config "doom-themes-ext-visual-bell"
+"Enable flashing the mode-line on error.")
 
 
 ;;; Generated autoloads from doom-tokyo-night-theme.el

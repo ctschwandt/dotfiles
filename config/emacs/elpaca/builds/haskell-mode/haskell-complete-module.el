@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/haskell-complete-module.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/haskell-complete-module.el

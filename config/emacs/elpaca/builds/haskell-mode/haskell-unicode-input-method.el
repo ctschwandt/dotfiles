@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/haskell-unicode-input-method.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/haskell-unicode-input-method.el

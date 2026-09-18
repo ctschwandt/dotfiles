@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from evil-tutor.el
 
-(autoload 'evil-tutor-start "evil-tutor" "\
-Start a evil-tutor session." t)
+(autoload 'evil-tutor-start "evil-tutor"
+"Start a evil-tutor session." t)
 (defalias 'evil-tutor-resume 'evil-tutor-start)
 (register-definition-prefixes "evil-tutor" '("evil-tutor-"))
 

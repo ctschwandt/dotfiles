@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/magit/lisp/magit-bundle.el
+/home/ctschwandt/.config/emacs/elpaca/sources/magit/lisp/magit-bundle.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/ghci-script-mode.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/ghci-script-mode.el

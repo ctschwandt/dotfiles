@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/all-the-icons/all-the-icons-faces.el
+/home/ctschwandt/.config/emacs/elpaca/sources/all-the-icons/all-the-icons-faces.el

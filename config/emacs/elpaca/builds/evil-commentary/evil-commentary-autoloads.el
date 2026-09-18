@@ -9,13 +9,13 @@
 
 ;;; Generated autoloads from evil-commentary.el
 
-(defvar evil-commentary-mode nil "\
-Non-nil if Evil-Commentary mode is enabled.
+(defvar evil-commentary-mode nil
+"Non-nil if Evil-Commentary mode is enabled.
 See the `evil-commentary-mode' command
 for a description of this minor mode.")
 (custom-autoload 'evil-commentary-mode "evil-commentary" nil)
-(autoload 'evil-commentary-mode "evil-commentary" "\
-Commentary mode.
+(autoload 'evil-commentary-mode "evil-commentary"
+"Commentary mode.
 
 This is a global minor mode.  If called interactively, toggle the
 `Evil-Commentary mode' mode.  If the prefix argument is positive, enable
@@ -37,8 +37,8 @@ disabled.
 
 ;;; Generated autoloads from evil-commentary-integration.el
 
-(autoload 'evil-commentary/org-comment-or-uncomment-region "evil-commentary-integration" "\
-Comment function for `org-mode'.
+(autoload 'evil-commentary/org-comment-or-uncomment-region "evil-commentary-integration"
+"Comment function for `org-mode'.
 
 (fn BEG END)" t)
 (register-definition-prefixes "evil-commentary-integration" '("evil-commentary/org-babel-do-in-edit-buffer"))

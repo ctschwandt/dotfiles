@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/cond-let/cond-let.el
+/home/ctschwandt/.config/emacs/elpaca/sources/cond-let/cond-let.el

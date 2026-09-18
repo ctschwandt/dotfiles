@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from org-bullets.el
 
-(autoload 'org-bullets-mode "org-bullets" "\
-Use UTF8 bullets in Org mode headings.
+(autoload 'org-bullets-mode "org-bullets"
+"Use UTF8 bullets in Org mode headings.
 
 This is a minor mode.  If called interactively, toggle the `Org-Bullets
 mode' mode.  If the prefix argument is positive, enable the mode, and if

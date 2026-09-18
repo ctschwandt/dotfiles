@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/with-editor/docs/with-editor.texi
+/home/ctschwandt/.config/emacs/elpaca/sources/with-editor/docs/with-editor.texi

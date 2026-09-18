@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from general.el
 
-(autoload 'general-define-key "general" "\
-The primary key definition function provided by general.el.
+(autoload 'general-define-key "general"
+"The primary key definition function provided by general.el.
 
 Define MAPS, optionally using DEFINER, in the keymap(s) corresponding to STATES
 and KEYMAPS.
@@ -105,8 +105,8 @@ LISPY-PLIST and WORF-PLIST are the global versions of extended definition
 keywords that are used for each corresponding custom DEFINER.
 
 (fn &rest MAPS &key DEFINER (STATES general-default-states) (KEYMAPS general-default-keymaps KEYMAPS-SPECIFIED-P) (PREFIX general-default-prefix) (NON-NORMAL-PREFIX general-default-non-normal-prefix) (GLOBAL-PREFIX general-default-global-prefix) INFIX PREFIX-COMMAND PREFIX-MAP PREFIX-NAME PREDICATE PACKAGE PROPERTIES REPEAT JUMP MAJOR-MODES (WK-MATCH-KEYS t) (WK-MATCH-BINDING t) (WK-FULL-KEYS t) LISPY-PLIST WORF-PLIST &allow-other-keys)")
-(autoload 'general-emacs-define-key "general" "\
-A wrapper for `general-define-key' that is similar to `define-key'.
+(autoload 'general-emacs-define-key "general"
+"A wrapper for `general-define-key' that is similar to `define-key'.
 It has a positional argument for KEYMAPS (that will not be overridden by a later
 :keymaps argument). Besides this, it acts the same as `general-define-key', and
 ARGS can contain keyword arguments in addition to keybindings. This can
@@ -114,9 +114,8 @@ basically act as a drop-in replacement for `define-key', and unlike with
 `general-define-key', KEYMAPS does not need to be quoted.
 
 (fn KEYMAPS &rest ARGS)" nil t)
-(function-put 'general-emacs-define-key 'lisp-indent-function 1)
-(autoload 'general-evil-define-key "general" "\
-A wrapper for `general-define-key' that is similar to `evil-define-key'.
+(autoload 'general-evil-define-key "general"
+"A wrapper for `general-define-key' that is similar to `evil-define-key'.
 It has positional arguments for STATES and KEYMAPS (that will not be overridden
 by a later :keymaps or :states argument). Besides this, it acts the same as
 `general-define-key', and ARGS can contain keyword arguments in addition to
@@ -125,9 +124,8 @@ keybindings. This can basically act as a drop-in replacement for
 to be quoted.
 
 (fn STATES KEYMAPS &rest ARGS)" nil t)
-(function-put 'general-evil-define-key 'lisp-indent-function 2)
-(autoload 'general-def "general" "\
-General definer that takes a variable number of positional arguments in ARGS.
+(autoload 'general-def "general"
+"General definer that takes a variable number of positional arguments in ARGS.
 This macro will act as `general-define-key', `general-emacs-define-key', or
 `general-evil-define-key' based on how many of the initial arguments do not
 correspond to keybindings. All quoted and non-quoted lists and symbols before
@@ -139,18 +137,16 @@ the positional arguments from the maps with a bogus keyword pair like
 \":start-maps t\"
 
 (fn &rest ARGS)" nil t)
-(function-put 'general-def 'lisp-indent-function 'defun)
-(autoload 'general-create-definer "general" "\
-A helper macro to create wrappers for `general-def'.
+(autoload 'general-create-definer "general"
+"A helper macro to create wrappers for `general-def'.
 This can be used to create key definers that will use a certain keymap, evil
 state, prefix key, etc. by default. NAME is the wrapper name and DEFAULTS are
 the default arguments. WRAPPING can also be optionally specified to use a
 different definer than `general-def'. It should not be quoted.
 
 (fn NAME &rest DEFAULTS &key WRAPPING &allow-other-keys)" nil t)
-(function-put 'general-create-definer 'lisp-indent-function 'defun)
-(autoload 'general-defs "general" "\
-A wrapper that splits into multiple `general-def's.
+(autoload 'general-defs "general"
+"A wrapper that splits into multiple `general-def's.
 Each consecutive grouping of positional argument followed by keyword/argument
 pairs (having only one or the other is fine) marks the start of a new section.
 Each section corresponds to one use of `general-def'. This means that settings
@@ -162,23 +158,21 @@ can never be used for keys with `general-defs'. Variables can still be used for
 definitions or as arguments to keywords.
 
 (fn &rest ARGS)" nil t)
-(function-put 'general-defs 'lisp-indent-function 'defun)
-(autoload 'general-unbind "general" "\
-A wrapper for `general-def' to unbind multiple keys simultaneously.
+(autoload 'general-unbind "general"
+"A wrapper for `general-def' to unbind multiple keys simultaneously.
 Insert after all keys in ARGS before passing ARGS to `general-def.' \":with
  #'func\" can optionally specified to use a custom function instead (e.g.
  `ignore').
 
 (fn &rest ARGS)" nil t)
-(function-put 'general-unbind 'lisp-indent-function 'defun)
-(autoload 'general-describe-keybindings "general" "\
-Show all keys that have been bound with general in an org buffer.
+(autoload 'general-describe-keybindings "general"
+"Show all keys that have been bound with general in an org buffer.
 Any local keybindings will be shown first followed by global keybindings.
 With a non-nil prefix ARG only show bindings in active maps.
 
 (fn &optional ARG)" t)
-(autoload 'general-key "general" "\
-Act as KEY's definition in the current context.
+(autoload 'general-key "general"
+"Act as KEY's definition in the current context.
 This uses an extended menu item's capability of dynamically computing a
 definition. It is recommended over `general-simulate-key' wherever possible. See
 the docstring of `general-simulate-key' and the readme for information about the
@@ -202,13 +196,12 @@ lookup. For example, something similar to using :state 'emacs would be:
 ACCEPT-DEFAULT, NO-REMAP, and POSITION are passed to `key-binding'.
 
 (fn KEY &key STATE DOCSTRING LET SETUP TEARDOWN ACCEPT-DEFAULT NO-REMAP POSITION)" nil t)
-(function-put 'general-key 'lisp-indent-function 1)
-(autoload 'general-simulate-keys "general" "\
-Deprecated. Please use `general-simulate-key' instead.
+(autoload 'general-simulate-keys "general"
+"Deprecated. Please use `general-simulate-key' instead.
 
 (fn KEYS &optional STATE KEYMAP (LOOKUP t) DOCSTRING NAME)" nil t)
-(autoload 'general-simulate-key "general" "\
-Create and return a command that simulates KEYS in STATE and KEYMAP.
+(autoload 'general-simulate-key "general"
+"Create and return a command that simulates KEYS in STATE and KEYMAP.
 
 `general-key' should be prefered over this whenever possible as it is simpler
 and has saner functionality in many cases because it does not rely on
@@ -251,9 +244,8 @@ The advantages of this over a keyboard macro are as follows:
 - The user can simulate an incomplete key sequence (e.g. for a keymap)
 
 (fn KEYS &key STATE KEYMAP NAME DOCSTRING (LOOKUP t) WHICH-KEY (REMAP t))" nil t)
-(function-put 'general-simulate-key 'lisp-indent-function 'defun)
-(autoload 'general-key-dispatch "general" "\
-Create and return a command that runs FALLBACK-COMMAND or a command in MAPS.
+(autoload 'general-key-dispatch "general"
+"Create and return a command that runs FALLBACK-COMMAND or a command in MAPS.
 MAPS consists of <key> <command> pairs. If a key in MAPS is matched, the
 corresponding command will be run. Otherwise FALLBACK-COMMAND will be run with
 the unmatched keys. So, for example, if \"ab\" was pressed, and \"ab\" is not
@@ -283,14 +275,12 @@ bound), the remapped version will be used instead of the original command unless
 REMAP is specified as nil (it is true by default).
 
 (fn FALLBACK-COMMAND &rest MAPS &key TIMEOUT INHERIT-KEYMAP NAME DOCSTRING WHICH-KEY (REMAP t) &allow-other-keys)" nil t)
-(function-put 'general-key-dispatch 'lisp-indent-function 1)
-(autoload 'general-predicate-dispatch "general" "\
-
+(autoload 'general-predicate-dispatch "general"
+"
 
 (fn FALLBACK-DEF &rest DEFS &key DOCSTRING &allow-other-keys)" nil t)
-(function-put 'general-predicate-dispatch 'lisp-indent-function 1)
-(autoload 'general-translate-key "general" "\
-Translate keys in the keymap(s) corresponding to STATES and KEYMAPS.
+(autoload 'general-translate-key "general"
+"Translate keys in the keymap(s) corresponding to STATES and KEYMAPS.
 STATES should be the name of an evil state, a list of states, or nil. KEYMAPS
 should be a symbol corresponding to the keymap to make the translations in or a
 list of keymap names. Keymap and state aliases are supported (as well as 'local
@@ -313,25 +303,24 @@ If both MAPS and DESCTRUCTIVE are nil, only create the backup keymap.
 
 (fn STATES KEYMAPS &rest MAPS &key DESTRUCTIVE &allow-other-keys)")
 (function-put 'general-translate-key 'lisp-indent-function 'defun)
-(autoload 'general-swap-key "general" "\
-Wrapper around `general-translate-key' for swapping keys.
+(autoload 'general-swap-key "general"
+"Wrapper around `general-translate-key' for swapping keys.
 STATES, KEYMAPS, and ARGS are passed to `general-translate-key'. ARGS should
 consist of key swaps (e.g. \"a\" \"b\" is equivalent to \"a\" \"b\" \"b\" \"a\"
 with `general-translate-key') and optionally keyword arguments for
 `general-translate-key'.
 
 (fn STATES KEYMAPS &rest ARGS)" nil t)
-(function-put 'general-swap-key 'lisp-indent-function 'defun)
-(autoload 'general-auto-unbind-keys "general" "\
-Advise `define-key' to automatically unbind keys when necessary.
+(autoload 'general-auto-unbind-keys "general"
+"Advise `define-key' to automatically unbind keys when necessary.
 This will prevent errors when a sub-sequence of a key is already bound (e.g. the
 user attempts to bind \"SPC a\" when \"SPC\" is bound, resulting in a \"Key
 sequnce starts with non-prefix key\" error). When UNDO is non-nil, remove
 advice.
 
 (fn &optional UNDO)")
-(autoload 'general-add-hook "general" "\
-A drop-in replacement for `add-hook'.
+(autoload 'general-add-hook "general"
+"A drop-in replacement for `add-hook'.
 Unlike `add-hook', HOOKS and FUNCTIONS can be single items or lists. APPEND and
 LOCAL are passed directly to `add-hook'. When TRANSIENT is non-nil, each
 function will remove itself from the hook it is in after it is run once. If
@@ -341,14 +330,14 @@ whether to remove a function from the hook. For example, if TRANSIENT is
 alternatively check something external and ignore the function's return value.
 
 (fn HOOKS FUNCTIONS &optional APPEND LOCAL TRANSIENT)")
-(autoload 'general-remove-hook "general" "\
-A drop-in replacement for `remove-hook'.
+(autoload 'general-remove-hook "general"
+"A drop-in replacement for `remove-hook'.
 Unlike `remove-hook', HOOKS and FUNCTIONS can be single items or lists. LOCAL is
 passed directly to `remove-hook'.
 
 (fn HOOKS FUNCTIONS &optional LOCAL)")
-(autoload 'general-advice-add "general" "\
-A drop-in replacement for `advice-add'.
+(autoload 'general-advice-add "general"
+"A drop-in replacement for `advice-add'.
 SYMBOLS, WHERE, FUNCTIONS, and PROPS correspond to the arguments for
 `advice-add'. Unlike `advice-add', SYMBOLS and FUNCTIONS can be single items or
 lists. When TRANSIENT is non-nil, each function will remove itself as advice
@@ -360,14 +349,14 @@ return value.
 
 (fn SYMBOLS WHERE FUNCTIONS &optional PROPS TRANSIENT)")
  (autoload 'general-add-advice "general")
-(autoload 'general-advice-remove "general" "\
-A drop-in replacement for `advice-remove'.
+(autoload 'general-advice-remove "general"
+"A drop-in replacement for `advice-remove'.
 Unlike `advice-remove', SYMBOLS and FUNCTIONS can be single items or lists.
 
 (fn SYMBOLS FUNCTIONS)")
  (autoload 'general-remove-advice "general")
-(autoload 'general-evil-setup "general" "\
-Set up some basic equivalents for vim mapping functions.
+(autoload 'general-evil-setup "general"
+"Set up some basic equivalents for vim mapping functions.
 This creates global key definition functions for the evil states.
 Specifying SHORT-NAMES as non-nil will create non-prefixed function
 aliases such as `nmap' for `general-nmap'.

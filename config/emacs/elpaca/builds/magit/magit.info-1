@@ -1,4 +1,4 @@
-This is magit.info, produced by makeinfo version 7.2 from magit.texi.
+This is magit.info, produced by makeinfo version 7.3 from magit.texi.
 
      Copyright (C) 2015-2026 Jonas Bernoulli
      <emacs.magit@jonas.bernoulli.dev>
@@ -32,7 +32,7 @@ to perform almost all of their daily version control tasks directly from
 within Emacs.  While many fine Git clients exist, only Magit and Git
 itself deserve to be called porcelains.
 
-This manual is for Magit version 4.5.0.
+This manual is for Magit version 4.7.1.
 
      Copyright (C) 2015-2026 Jonas Bernoulli
      <emacs.magit@jonas.bernoulli.dev>
@@ -1986,7 +1986,9 @@ retained.
 sections are available.  There is one additional command.
 
 ‘k’ (‘magit-process-kill’)
-     This command kills the process represented by the section at point.
+     This command first tries to interrupt the process represented by
+     the section at point.  If that fails a second invocation instead
+     kills the process.
 
 ‘M-x magit-toggle-git-debug’
      This command toggles whether additional git errors are reported.
@@ -2173,6 +2175,83 @@ where Emacs is searching for ‘git’.
      what you are doing.  And think very hard before adding something;
      it will be used every time Magit runs Git for any purpose.
 
+4.7.6 Mapping Git Hooks to Lisp Hooks
+-------------------------------------
+
+Git hooks can be configured to call Lisp hooks, starting with Git
+v2.54.0.  The mechanism described here is only used when ‘git’ is
+invoked by Magit, and ‘git’ is run asynchronously and on the local
+machine.
+
+‘magit-run-hooks-from-githooks’
+     This option controls whether Git hooks may run Lisp hooks.
+
+     Magit only defines one such hook mapping, but users can add more.
+
+‘magit-user-githook-file’
+     This option controls the location of a user-editable file
+     containing additional hook mappings.
+
+ -- Variable: magit-githook-directory
+     The value of this variable is the directory containing files Magit
+     needs to map Git hooks to Lisp hooks.
+
+     This directory must contains two files; ‘config’, which maps Git
+     hooks to the Lisp hook ‘magit-common-git-post-commit-functions’,
+     and an executable ‘magit-run-git-hook’, which is used in that, and
+     potentially other, hook mappings.
+
+     The value of this variable is set by ‘magit-process-git-arguments’,
+     when it is first needed.  Users can set it to another directory,
+     but that should rarely be necessary.  Additional hook mappings
+     should instead be defined in ‘magit-user-githook-file’.
+
+ -- Function: magit-run-git-hook (hook &rest args)
+     This function runs the Lisp hook HOOK with the specified arguments
+     ARGS.  ARGS are the arguments (a possibly empty list of strings),
+     which the Git hook was called with.  HOOK is a string naming a
+     hook.
+
+     This function is only intended to be called via ‘emacsclient’, by
+     an executable by the same name, which in turn is only intended to
+     be called by Git hooks.
+
+ -- Variable: magit-common-git-post-commit-functions
+     This Lisp hook is run by the Git hooks ‘post-commit’, ‘post-merge’
+     and ‘post-rewrite’.  There is not a single Git hook, which is
+     called after a commit is created; to achieve that, all of these
+     hooks have to be used.
+
+   Git hooks are documented in *note (gitman)githooks::.  Also see *note
+(gitman)git-hook::.  Using ‘magit-common-git-post-commit-functions’ as
+an example, the following is how Magit gets Git to map Git hooks to Lisp
+hooks.
+
+   Iff Magit calls Git asynchronously and on the local machine, it
+injects the global arguments ‘-c include.path=/path/to/githooks/config’.
+That file contains:
+
+     [hook "magit-common-post-commit"]
+       event = post-commit
+       event = post-merge
+       event = post-rewrite
+       command = magit-run-git-hook magit-common-git-post-commit-functions
+
+   Consequently when one of the Git hooks ‘post-commit’, ‘post-merge’ or
+‘post-rewrite’ is triggered, that causes the ‘magit-run-git-hook’
+executable to be called with ‘magit-common-git-post-commit-functions’ as
+the first argument.
+
+   That executable used the ‘emacsclient’ to call a Lisp function by the
+same name, which takes the name of a Lisp hook as the first argument.
+The executable may receive additional arguments from the Git hook, which
+it passes on to the function.  All arguments are strings.
+
+   The function ‘magit-run-git-hook’ runs the Lisp hook using
+‘run-hook-with-args’, passing along all arguments, starting with the
+second.  It also arranges for ‘message’ to output to standard output, so
+that messages appear in Magit's process buffer.
+
 
 File: magit.info,  Node: Inspecting,  Next: Manipulating,  Prev: Interface Concepts,  Up: Top
 
@@ -2302,6 +2381,14 @@ that it should be bound globally.  We recommend using ‘C-x g’:
      ‘magit-display-repository-buffer’.  It supports displaying any
      existing Magit buffer that belongs to the current repository; not
      just the status buffer.
+
+ -- Command: magit-parent-status
+     This command shows the status of the parent repository of the
+     current Git repository.  If the current repository is a submodule,
+     it shows the status buffer of its super-repository.  Otherwise it
+     steps outside the worktree of the current repository, and if that
+     takes us to another repository, that is considered that the parent
+     repository.
 
 5.1.1 Status Sections
 ---------------------
@@ -2455,12 +2542,6 @@ that you don't do that.
 
 5.1.3 Status Log Sections
 -------------------------
-
- -- Function: magit-insert-unpulled-or-recent-commits
-     Insert section showing unpulled or recent commits.  If an upstream
-     is configured for the current branch and it is ahead of the current
-     branch, then show the missing commits.  Otherwise, show the last
-     ‘magit-log-section-commit-count’ commits.
 
  -- Function: magit-insert-recent-commits
      Insert section showing the last ‘magit-log-section-commit-count’
@@ -3291,7 +3372,43 @@ not support these arguments.)
      initialized.
 
 ‘D t’ (‘magit-diff-toggle-refine-hunk’)
-     This command toggles hunk refinement on or off.
+     This command toggles hunk refinement on or off, or switches the
+     refinement method.
+
+     If hunk refinement is currently on, then turn off hunk refinement.
+     If hunk refinement is off, then turn on immediate hunk refinement.
+
+     With a prefix argument, an alternative refinement method comes into
+     play.  When using that method, mode hunks are not refined
+     immediately, instead each hunk is refined once it is selected, and
+     then stays refined until the next refresh of the buffer.  If hunk
+     refinement is currently on, then toggle between refining all hunks
+     up front or only once they are selected.  If hunk refinement is
+     off, then turn on hunk refinement, using the eventual refinement
+     method.
+
+     Customize option ‘magit-diff-refine-hunk’ to change the default
+     method.
+
+‘D T’ (‘magit-diff-toggle-fontify-hunk’)
+     This command toggles hunk fontification on or off, or switches the
+     fontification method.
+
+     If hunk fontification is currently on, then turn off hunk
+     fontification.  If hunk fontification is off, then turn on
+     immediate hunk fontification.
+
+     With a prefix argument, an alternative fontification method comes
+     into play.  When using that method, mode hunks are not refined
+     immediately, instead each hunk is refined once it is selected, and
+     then stays refined until the next refresh of the buffer.  If hunk
+     fontification is currently on, then toggle between refining all
+     hunks up front or only once they are selected.  If hunk
+     fontification is off, then turn on fontification, using the
+     eventual fontification method.
+
+     Customize option ‘magit-diff-fontify-hunk’ to change the default
+     method.
 
 ‘D r’ (‘magit-diff-switch-range-type’)
      This command converts the diff range type from "revA..revB" to
@@ -3413,6 +3530,39 @@ they are available here too.
  -- User Option: magit-diff-refine-ignore-whitespace
      Whether to ignore whitespace changes in word-granularity
      differences.
+
+ -- User Option: magit-diff-fontify-hunk
+     Whether to apply syntax highlighting to diff hunks.
+
+        • ‘nil’ Never fontify diff hunks.
+        • ‘all’ Fontify all diff hunks.
+        • ‘t’ Fontify each hunk once it becomes the current section.
+          Keep the fontification when another section is selected.
+          Refreshing the buffer removes all fontification.  This variant
+          is only provided for performance reasons.
+
+     If this is enabled, then ‘magit-diff-specify-hunk-foreground’
+     should be disabled.  Also consider enabling
+     ‘magit-diff-use-indicator-faces’.  Emacs has to be restarted, after
+     changing the value of the former.
+
+     This is considered experimental and is disabled by default, because
+     the fontification is done synchronously, and that can lead to a
+     noticeable delay.  The plan is to make it asynchronous, probably
+     with the help of the new ‘futur’ package, which itself still under
+     heavy development.
+
+ -- User Option: magit-diff-specify-hunk-foreground
+     Whether to specify foreground colors for hunk faces.
+
+     Setting this only has an effect if done before Magit is loaded.
+
+ -- User Option: magit-diff-use-indicator-faces
+     Whether to use separate faces for diff side indicators.
+
+     If non-‘nil’, use, for example, ‘magit-diff-removed-indicator’ for
+     the plus sign at the beginning of a removed line.  If ‘nil’, use
+     the same face as for the rest of the line.
 
  -- User Option: magit-diff-adjust-tab-width
      Whether to adjust the width of tabs in diffs.
@@ -3596,6 +3746,25 @@ file restriction as that log buffer (also see the command
    If the revision buffer is not displayed from a log buffer, the file
 restriction is determined as usual (see *note Transient Arguments and
 Buffer Variables::).
+
+ -- User Option: magit-revision-use-dedicated-buffers
+     Whether ‘magit-show-commit’ uses a dedicated buffer for each
+     revision.
+
+     If this is ‘nil’, then each revision is initially displayed in the
+     same per-repository buffer.  You can then lock that buffer to the
+     revision; if you later display another revision, the locked buffer
+     continues to display the same revision as before and the new
+     revision is displayed in another bufer.
+
+     If this is ‘t’, then each revision is displayed in a dedicated
+     buffer.  A revision buffer is only reused (i.e., raised), if it
+     already displays the requested revision.  If you enable this, you
+     will quickly accumulate revision buffers and will have to find a
+     way to keep that under control.
+     ‘magit-{blame,log,status}-maybe-update-revision-buffer’ also will
+     stop working, if this is enabled.  For these reasons it is
+     recommended, that you do not enable this."
 
 
 File: magit.info,  Node: Ediffing,  Next: References Buffer,  Prev: Diffing,  Up: Inspecting
@@ -4001,12 +4170,18 @@ following suffix commands.
 ‘B B’ (‘magit-bisect-start’)
      Start a bisect session.
 
-     Bisecting a bug means to find the commit that introduced it.  This
-     command starts such a bisect session by asking for a known good
-     commit and a known bad commit.  If you're bisecting a change that
-     isn't a regression, you can select alternate terms that are
-     conceptually more fitting than "bad" and "good", but the infix
-     arguments to do so are disabled by default.
+     Bisecting a bug means to find the commit that introduced it.
+
+     This command starts such a bisect session by asking for a known
+     good commit and a known bad commit.  If the region marks a range of
+     commit, where one is an ancestor of the other, then these commits
+     are used as the good and bad commits.  Otherwise these starting
+     points are read in the minibuffer.
+
+     If you're bisecting a change that isn't a regression, you can
+     select alternate terms that are conceptually more fitting than
+     "bad" and "good", but the infix arguments to do so are disabled by
+     default.
 
 ‘B s’ (‘magit-bisect-run’)
      Bisect automatically by running commands after each step.
@@ -4622,14 +4797,14 @@ Fine-grained un-/staging has to be done from the status or a diff
 buffer, but it's also possible to un-/stage all changes made to the file
 visited in the current buffer right from inside that buffer.
 
-‘M-x magit-stage-file’
+‘M-x magit-stage-files’
      When invoked inside a file-visiting buffer, then stage all changes
      to that file.  In a Magit buffer, stage the file at point if any.
      Otherwise prompt for a file to be staged.  With a prefix argument
      always prompt the user for a file, even in a file-visiting buffer
      or when there is a file section at point.
 
-‘M-x magit-unstage-file’
+‘M-x magit-unstage-files’
      When invoked inside a file-visiting buffer, then unstage all
      changes to that file.  In a Magit buffer, unstage the file at point
      if any.  Otherwise prompt for a file to be unstaged.  With a prefix
@@ -4690,6 +4865,17 @@ variants.
 
    With a prefix argument all apply variants attempt a 3-way merge when
 appropriate (i.e., when ‘git apply’ is used internally).
+
+ -- Command: magit-copy-diff-as-kill
+     This command saves the diff at point to the kill ring.
+
+     It can be used on staged and unstaged changes, and anywhere
+     ‘magit-apply’ can be used.  Additionally, if there is no diff at
+     point but ‘magit-buffer-revision’ is non-nil, or there is a commit
+     at point, the diff for that commit is saved.
+
+     This is useful if you need to copy some diff elsewhere, e.g., to a
+     mail client or browser text area.
 
 
 File: magit.info,  Node: Committing,  Next: Branching,  Prev: Applying,  Up: Manipulating
@@ -5438,10 +5624,28 @@ them.  Those features are available from separate transient commands.
      minibuffer.  With prefix argument the branch is renamed even if
      that name conflicts with an existing branch.
 
+‘b r’ (‘magit-checkout-remote-ref’)
+     This commands first reads a remote from the user.  Then it queries
+     that remote for a list of its references and presents that to the
+     user.  After the user has selected one of them, it fetches just
+     that ref, and finally it checks out "FETCH_HEAD", which now refers
+     to the same commit as REF does on REMOTE.
+
+     This is only useful if you usually only fetch a subset of the refs
+     from REMOTE.  Otherwise it is better to use ‘magit-checkout’, as
+     that avoids a round-trip.
+
+     This command is not shown in the menu by default, see *note
+     transient#Enabling and Disabling Suffixes: (transient)Enabling and
+     Disabling Suffixes.
+
  -- User Option: magit-branch-read-upstream-first
      When creating a branch, whether to read the upstream branch before
      the name of the branch that is to be created.  The default is ‘t’,
      and I recommend you leave it at that.
+
+ -- User Option: magit-branch-name-suggestions
+     List of names and/or prefixes suggested when naming a new branch.
 
  -- User Option: magit-branch-prefer-remote-upstream
      This option specifies whether remote upstreams are favored over
@@ -5729,11 +5933,15 @@ following suffix commands.
      merge commit, which makes it possible to inspect how conflicts were
      resolved and to adjust the commit message.
 
+     To create an octopus-merge, separate branches with commas.
+
 ‘m e’ (‘magit-merge-editmsg’)
      This command merges another branch or an arbitrary revision into
      the current branch and opens a commit message buffer, so that the
      user can make adjustments.  The commit is not actually created
      until the user finishes with ‘C-c C-c’.
+
+     To create an octopus-merge, separate branches with commas.
 
 ‘m n’ (‘magit-merge-nocommit’)
      This command merges another branch or an arbitrary revision into
@@ -5752,6 +5960,8 @@ following suffix commands.
      merged.  Finally, if ‘magit-branch-pull-request’ was used to create
      the merged branch, then the respective remote branch is also
      removed.
+
+     To create an octopus-merge, separate branches with commas.
 
 ‘m d’ (‘magit-merge-dissolve’)
      This command merges the current branch into another local branch
@@ -5959,6 +6169,11 @@ Two Remotes::.
      This command starts a non-interactive rebase sequence to transfer
      commits from START to ‘HEAD’ onto NEWBASE.  START has to be
      selected from a list of recent commits.
+
+     This command calls ‘git rebase --onto NEWBASE START HEAD’.  Because
+     the range always ends at ‘HEAD’, you must first check out the
+     branch or commit you want as the upper bound (a detached ‘HEAD’
+     works too).
 
    By default Magit uses the ‘--autostash’ argument, which causes
 uncommitted changes to be stored in a stash before the rebase begins.
@@ -6664,211 +6879,4 @@ Also see *note (gitman)git-stash::.
         • AUTHOR-WIDTH has to be an integer.  When the name of the
           author is shown, then this specifies how much space is used to
           do so.
-
-
-File: magit.info,  Node: Transferring,  Next: Miscellaneous,  Prev: Manipulating,  Up: Top
-
-7 Transferring
-**************
-
-* Menu:
-
-* Remotes::
-* Fetching::
-* Pulling::
-* Pushing::
-* Plain Patches::
-* Maildir Patches::
-
-
-File: magit.info,  Node: Remotes,  Next: Fetching,  Up: Transferring
-
-7.1 Remotes
-===========
-
-7.1.1 Remote Commands
----------------------
-
-The transient prefix command ‘magit-remote’ is used to add remotes and
-to make changes to existing remotes.  This command only deals with
-remotes themselves, not with branches or the transfer of commits.  Those
-features are available from separate transient commands.
-
-   Also see *note (gitman)git-remote::.
-
-‘M’ (‘magit-remote’)
-     This transient prefix command binds the following suffix commands
-     and displays them in a temporary buffer until a suffix is invoked.
-
-     By default it also binds and displays the values of some
-     remote-related Git variables and allows changing their values.
-
- -- User Option: magit-remote-direct-configure
-     This option controls whether remote-related Git variables are
-     accessible directly from the transient ‘magit-remote’.
-
-     If ‘t’ (the default) and a local branch is checked out, then
-     ‘magit-remote’ features the variables for the upstream remote of
-     that branch, or if ‘HEAD’ is detached, for ‘origin’, provided that
-     exists.
-
-     If ‘nil’, then ‘magit-remote-configure’ has to be used to do so.
-
-‘M C’ (‘magit-remote-configure’)
-     This transient prefix command binds commands that set the value of
-     remote-related variables and displays them in a temporary buffer
-     until the transient is exited.
-
-     With a prefix argument, this command always prompts for a remote.
-
-     Without a prefix argument this depends on whether it was invoked as
-     a suffix of ‘magit-remote’ and on the
-     ‘magit-remote-direct-configure’ option.  If ‘magit-remote’ already
-     displays the variables for the upstream, then it does not make
-     sense to invoke another transient that displays them for the same
-     remote.  In that case this command prompts for a remote.
-
-   The variables are described in *note Remote Git Variables::.
-
-‘M a’ (‘magit-remote-add’)
-     This command add a remote and fetches it.  The remote name and url
-     are read in the minibuffer.
-
-‘M r’ (‘magit-remote-rename’)
-     This command renames a remote.  Both the old and the new names are
-     read in the minibuffer.
-
-‘M u’ (‘magit-remote-set-url’)
-     This command changes the url of a remote.  Both the remote and the
-     new url are read in the minibuffer.
-
-‘M k’ (‘magit-remote-remove’)
-     This command deletes a remote, read in the minibuffer.
-
-‘M p’ (‘magit-remote-prune’)
-     This command removes stale remote-tracking branches for a remote
-     read in the minibuffer.
-
-‘M P’ (‘magit-remote-prune-refspecs’)
-     This command removes stale refspecs for a remote read in the
-     minibuffer.
-
-     A refspec is stale if there no longer exists at least one branch on
-     the remote that would be fetched due to that refspec.  A stale
-     refspec is problematic because its existence causes Git to refuse
-     to fetch according to the remaining non-stale refspecs.
-
-     If only stale refspecs remain, then this command offers to either
-     delete the remote or to replace the stale refspecs with the default
-     refspec ("+refs/heads/*:refs/remotes/REMOTE/*").
-
-     This command also removes the remote-tracking branches that were
-     created due to the now stale refspecs.  Other stale branches are
-     not removed.
-
- -- User Option: magit-remote-add-set-remote.pushDefault
-     This option controls whether the user is asked whether they want to
-     set ‘remote.pushDefault’ after adding a remote.
-
-     If ‘ask’, then users is always ask.  If ‘ask-if-unset’, then the
-     user is only if the variable isn't set already.  If ‘nil’, then the
-     user isn't asked and the variable isn't set.  If the value is a
-     string, then the variable is set without the user being asked,
-     provided that the name of the added remote is equal to that string
-     and the variable isn't already set.
-
-7.1.2 Remote Git Variables
---------------------------
-
-These variables can be set from the transient prefix command
-‘magit-remote-configure’.  By default they can also be set from
-‘magit-remote’.  See *note Remote Commands::.
-
- -- Variable: remote.NAME.url
-     This variable specifies the url of the remote named NAME.  It can
-     have multiple values.
-
- -- Variable: remote.NAME.fetch
-     The refspec used when fetching from the remote named NAME.  It can
-     have multiple values.
-
- -- Variable: remote.NAME.pushurl
-     This variable specifies the url used for pushing to the remote
-     named NAME.  If it is not specified, then ‘remote.NAME.url’ is used
-     instead.  It can have multiple values.
-
- -- Variable: remote.NAME.push
-     The refspec used when pushing to the remote named NAME.  It can
-     have multiple values.
-
- -- Variable: remote.NAME.tagOpts
-     This variable specifies what tags are fetched by default.  If the
-     value is ‘--no-tags’ then no tags are fetched.  If the value is
-     ‘--tags’, then all tags are fetched.  If this variable has no
-     value, then only tags are fetched that are reachable from fetched
-     branches.
-
-
-File: magit.info,  Node: Fetching,  Next: Pulling,  Prev: Remotes,  Up: Transferring
-
-7.2 Fetching
-============
-
-Also see *note (gitman)git-fetch::.  For information about the upstream
-and the push-remote, see *note The Two Remotes::.
-
-‘f’ (‘magit-fetch’)
-     This transient prefix command binds the following suffix commands
-     along with the appropriate infix arguments and displays them in a
-     temporary buffer until a suffix is invoked.
-
-‘f p’ (‘magit-fetch-from-pushremote’)
-     This command fetches from the current push-remote.
-
-     With a prefix argument or when the push-remote is either not
-     configured or unusable, then let the user first configure the
-     push-remote.
-
-‘f u’ (‘magit-fetch-from-upstream’)
-     This command fetch from the upstream of the current branch.
-
-     If the upstream is configured for the current branch and names an
-     existing remote, then use that.  Otherwise try to use another
-     remote: If only a single remote is configured, then use that.
-     Otherwise if a remote named "origin" exists, then use that.
-
-     If no remote can be determined, then this command is not available
-     from the ‘magit-fetch’ transient prefix and invoking it directly
-     results in an error.
-
-‘f e’ (‘magit-fetch-other’)
-     This command fetch from a repository read from the minibuffer.
-
-‘f o’ (‘magit-fetch-branch’)
-     This command fetches a branch from a remote, both of which are read
-     from the minibuffer.
-
-‘f r’ (‘magit-fetch-refspec’)
-     This command fetches from a remote using an explicit refspec, both
-     of which are read from the minibuffer.
-
-‘f a’ (‘magit-fetch-all’)
-     This command fetches from all remotes.
-
-‘f m’ (‘magit-fetch-modules’)
-     This command fetches all submodules.  With a prefix argument, it
-     acts as a transient prefix command, allowing the caller to set
-     options.
-
- -- User Option: magit-pull-or-fetch
-     By default fetch and pull commands are available from separate
-     transient prefix command.  Setting this to ‘t’ adds some (but not
-     all) of the above suffix commands to the ‘magit-pull’ transient.
-
-     If you do that, then you might also want to change the key binding
-     for these prefix commands, e.g.:
-
-          (setq magit-pull-or-fetch t)
-          (define-key magit-mode-map "f" 'magit-pull) ; was magit-fetch
-          (define-key magit-mode-map "F" nil)         ; was magit-pull
 

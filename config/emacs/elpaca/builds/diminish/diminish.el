@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/diminish/diminish.el
+/home/ctschwandt/.config/emacs/elpaca/sources/diminish/diminish.el

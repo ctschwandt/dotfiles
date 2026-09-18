@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/magit/lisp/magit-submodule.el
+/home/ctschwandt/.config/emacs/elpaca/sources/magit/lisp/magit-submodule.el

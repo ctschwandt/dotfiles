@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from dired-open.el
 
-(autoload 'dired-open-file "dired-open" "\
-Try `dired-open-functions' to open the thing under point.
+(autoload 'dired-open-file "dired-open"
+"Try `dired-open-functions' to open the thing under point.
 
 That can be either file or any other line of dired listing.
 

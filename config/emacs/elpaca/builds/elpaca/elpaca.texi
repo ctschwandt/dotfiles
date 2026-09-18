@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/elpaca/doc/elpaca.texi
+/home/ctschwandt/.config/emacs/elpaca/sources/elpaca/doc/elpaca.texi

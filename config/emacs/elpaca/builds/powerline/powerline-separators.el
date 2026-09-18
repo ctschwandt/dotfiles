@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/powerline/powerline-separators.el
+/home/ctschwandt/.config/emacs/elpaca/sources/powerline/powerline-separators.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/nerd-icons/nerd-icons-data.el
+/home/ctschwandt/.config/emacs/elpaca/sources/nerd-icons/nerd-icons-data.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/swiper/counsel.el
+/home/ctschwandt/.config/emacs/elpaca/sources/swiper/counsel.el

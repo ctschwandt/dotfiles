@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/swiper/swiper.el
+/home/ctschwandt/.config/emacs/elpaca/sources/swiper/swiper.el

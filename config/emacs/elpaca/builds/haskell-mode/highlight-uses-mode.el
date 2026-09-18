@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/highlight-uses-mode.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/highlight-uses-mode.el

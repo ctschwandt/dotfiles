@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from eshell-toggle.el
 
-(autoload 'eshell-toggle "eshell-toggle" "\
-Show eshell at the bottom of current window and cd to current buffer's path.
+(autoload 'eshell-toggle "eshell-toggle"
+"Show eshell at the bottom of current window and cd to current buffer's path.
 \\(1\\) If eshell-toggle'd buffer is already visible in frame for
 current buffer then select (toggled) eshell window.
 \\(2\\) If current window is (toggled) eshell itself then hide it.

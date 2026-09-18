@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/llama/.dir-locals.el
+/home/ctschwandt/.config/emacs/elpaca/sources/llama/.dir-locals.el

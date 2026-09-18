@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/swiper/ivy-overlay.el
+/home/ctschwandt/.config/emacs/elpaca/sources/swiper/ivy-overlay.el

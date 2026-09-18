@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/all-the-icons-ivy-rich/all-the-icons-ivy-rich.el
+/home/ctschwandt/.config/emacs/elpaca/sources/all-the-icons-ivy-rich/all-the-icons-ivy-rich.el

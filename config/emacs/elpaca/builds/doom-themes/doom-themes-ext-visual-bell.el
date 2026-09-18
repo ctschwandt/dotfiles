@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/themes/extensions/doom-themes-ext-visual-bell.el
+/home/ctschwandt/.config/emacs/elpaca/sources/themes/extensions/doom-themes-ext-visual-bell.el

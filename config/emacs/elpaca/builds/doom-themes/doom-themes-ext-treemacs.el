@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/themes/extensions/doom-themes-ext-treemacs.el
+/home/ctschwandt/.config/emacs/elpaca/sources/themes/extensions/doom-themes-ext-treemacs.el

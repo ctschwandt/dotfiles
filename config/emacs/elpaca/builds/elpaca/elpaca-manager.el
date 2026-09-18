@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/elpaca/elpaca-manager.el
+/home/ctschwandt/.config/emacs/elpaca/sources/elpaca/elpaca-manager.el

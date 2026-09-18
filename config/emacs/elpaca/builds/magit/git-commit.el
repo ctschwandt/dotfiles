@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/magit/lisp/git-commit.el
+/home/ctschwandt/.config/emacs/elpaca/sources/magit/lisp/git-commit.el

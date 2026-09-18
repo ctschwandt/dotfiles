@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/f/f.el
+/home/ctschwandt/.config/emacs/elpaca/sources/f/f.el

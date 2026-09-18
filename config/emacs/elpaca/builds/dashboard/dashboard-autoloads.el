@@ -9,12 +9,12 @@
 
 ;;; Generated autoloads from dashboard.el
 
-(autoload 'dashboard-open "dashboard" "\
-Open (or refresh) the *dashboard* buffer.
+(autoload 'dashboard-open "dashboard"
+"Open (or refresh) the *dashboard* buffer.
 
 (fn &rest _)" t)
-(autoload 'dashboard-setup-startup-hook "dashboard" "\
-Setup post initialization hooks unless a command line argument is provided.")
+(autoload 'dashboard-setup-startup-hook "dashboard"
+"Setup post initialization hooks unless a command line argument is provided.")
 (register-definition-prefixes "dashboard" '("dashboard-"))
 
 

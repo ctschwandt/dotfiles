@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/s/s.el
+/home/ctschwandt/.config/emacs/elpaca/sources/s/s.el

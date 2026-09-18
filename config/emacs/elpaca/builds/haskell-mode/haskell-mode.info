@@ -1,4 +1,4 @@
-This is haskell-mode.info, produced by makeinfo version 7.2 from
+This is haskell-mode.info, produced by makeinfo version 7.3 from
 haskell-mode.texi.
 
 This manual is for Haskell mode, version 17.5
@@ -2418,7 +2418,7 @@ Variable index
 * haskell-c2hs-hook-name-face:           Syntax highlighting. (line  39)
 * haskell-c2hs-hook-pair-face:           Syntax highlighting. (line  38)
 * haskell-cabal-mode-hook:               Editing Cabal files. (line   6)
-* haskell-compile-cabal-build-alt-command: Compilation.       (line  71)
+* haskell-compile-cabal-build-alt-command: Compilation.       (line  72)
 * haskell-compile-cabal-build-command:   Compilation.         (line  72)
 * haskell-compile-command:               Compilation.         (line  72)
 * haskell-compile-stack-build-alt-command: Compilation.       (line  72)
@@ -2436,7 +2436,7 @@ Variable index
 * haskell-pragma-face:                   Syntax highlighting. (line  34)
 * haskell-process-args-cabal-repl:       Interactive Haskell. (line  76)
 * haskell-process-args-ghci:             Interactive Haskell. (line  76)
-* haskell-process-args-stack-ghci:       Interactive Haskell. (line  75)
+* haskell-process-args-stack-ghci:       Interactive Haskell. (line  76)
 * haskell-process-path-cabal:            Interactive Haskell. (line  76)
 * haskell-process-path-ghci:             Interactive Haskell. (line  76)
 * haskell-process-path-stack:            Interactive Haskell. (line  76)

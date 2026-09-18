@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/evil/evil-core.el
+/home/ctschwandt/.config/emacs/elpaca/sources/evil/evil-core.el

@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from all-the-icons.el
 
-(autoload 'all-the-icons-icon-for-dir "all-the-icons" "\
-Get the formatted icon for DIR.
+(autoload 'all-the-icons-icon-for-dir "all-the-icons"
+"Get the formatted icon for DIR.
 ARG-OVERRIDES should be a plist containining `:height',
 `:v-adjust' or `:face' properties like in the normal icon
 inserting functions.
@@ -18,35 +18,35 @@ inserting functions.
 Note: You want chevron, please use `all-the-icons-icon-for-dir-with-chevron'.
 
 (fn DIR &rest ARG-OVERRIDES)")
-(autoload 'all-the-icons-icon-for-file "all-the-icons" "\
-Get the formatted icon for FILE.
+(autoload 'all-the-icons-icon-for-file "all-the-icons"
+"Get the formatted icon for FILE.
 ARG-OVERRIDES should be a plist containining `:height',
 `:v-adjust' or `:face' properties like in the normal icon
 inserting functions.
 
 (fn FILE &rest ARG-OVERRIDES)")
-(autoload 'all-the-icons-icon-for-mode "all-the-icons" "\
-Get the formatted icon for MODE.
+(autoload 'all-the-icons-icon-for-mode "all-the-icons"
+"Get the formatted icon for MODE.
 ARG-OVERRIDES should be a plist containining `:height',
 `:v-adjust' or `:face' properties like in the normal icon
 inserting functions.
 
 (fn MODE &rest ARG-OVERRIDES)")
-(autoload 'all-the-icons-icon-for-url "all-the-icons" "\
-Get the formatted icon for URL.
+(autoload 'all-the-icons-icon-for-url "all-the-icons"
+"Get the formatted icon for URL.
 If an icon for URL isn't found in `all-the-icons-url-alist', a globe is used.
 ARG-OVERRIDES should be a plist containining `:height',
 `:v-adjust' or `:face' properties like in the normal icon
 inserting functions.
 
 (fn URL &rest ARG-OVERRIDES)")
-(autoload 'all-the-icons-install-fonts "all-the-icons" "\
-Helper function to download and install the latests fonts based on OS.
+(autoload 'all-the-icons-install-fonts "all-the-icons"
+"Helper function to download and install the latests fonts based on OS.
 When PFX is non-nil, ignore the prompt and just install
 
 (fn &optional PFX)" t)
-(autoload 'all-the-icons-insert "all-the-icons" "\
-Interactive icon insertion function.
+(autoload 'all-the-icons-insert "all-the-icons"
+"Interactive icon insertion function.
 When Prefix ARG is non-nil, insert the propertized icon.
 When FAMILY is non-nil, limit the candidates to the icon set matching it.
 

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/emacs-dashboard/dashboard.el
+/home/ctschwandt/.config/emacs/elpaca/sources/dashboard/dashboard.el

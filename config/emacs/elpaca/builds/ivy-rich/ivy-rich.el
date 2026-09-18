@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/ivy-rich/ivy-rich.el
+/home/ctschwandt/.config/emacs/elpaca/sources/ivy-rich/ivy-rich.el

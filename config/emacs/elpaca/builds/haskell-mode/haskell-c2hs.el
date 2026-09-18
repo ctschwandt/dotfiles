@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/haskell-c2hs.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/haskell-c2hs.el

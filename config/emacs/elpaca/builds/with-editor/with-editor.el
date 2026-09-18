@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/with-editor/lisp/with-editor.el
+/home/ctschwandt/.config/emacs/elpaca/sources/with-editor/lisp/with-editor.el

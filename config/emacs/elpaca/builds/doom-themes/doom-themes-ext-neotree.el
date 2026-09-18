@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/themes/extensions/doom-themes-ext-neotree.el
+/home/ctschwandt/.config/emacs/elpaca/sources/themes/extensions/doom-themes-ext-neotree.el

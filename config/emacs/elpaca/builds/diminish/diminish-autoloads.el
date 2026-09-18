@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from diminish.el
 
-(autoload 'diminish "diminish" "\
-Diminish mode-line display of minor mode MODE to TO-WHAT (default \"\").
+(autoload 'diminish "diminish"
+"Diminish mode-line display of minor mode MODE to TO-WHAT (default \"\").
 
 Interactively, enter (with completion) the name of any minor mode, followed
 on the next line by what you want it diminished to (default empty string).
@@ -27,8 +27,8 @@ well, you'll get a display like \"AbbrevX\".  This function prepends a space
 to TO-WHAT if it's > 1 char long & doesn't already begin with a space.
 
 (fn MODE &optional TO-WHAT)" t)
-(autoload 'diminish-undo "diminish" "\
-Restore mode-line display of diminished mode MODE to its minor-mode value.
+(autoload 'diminish-undo "diminish"
+"Restore mode-line display of diminished mode MODE to its minor-mode value.
 Do nothing if the arg is a minor mode that hasn't been diminished.
 
 Interactively, enter (with completion) the name of any diminished mode (a
@@ -38,8 +38,8 @@ The response to the prompt shouldn't be quoted.  However, in Lisp code,
 the arg must be quoted as a symbol, as in (diminish-undo \\='diminished-modes).
 
 (fn MODE)" t)
-(autoload 'diminished-modes "diminish" "\
-Echo all active diminished or minor modes as if they were minor.
+(autoload 'diminished-modes "diminish"
+"Echo all active diminished or minor modes as if they were minor.
 The display goes in the echo area; if it's too long even for that,
 you can see the whole thing in the *Messages* buffer.
 This doesn't change the status of any modes; it just lets you see

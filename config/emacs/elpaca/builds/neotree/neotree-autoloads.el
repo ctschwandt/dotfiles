@@ -9,31 +9,31 @@
 
 ;;; Generated autoloads from neotree.el
 
-(autoload 'neotree-find "neotree" "\
-Quick select node which specified PATH in NeoTree.
+(autoload 'neotree-find "neotree"
+"Quick select node which specified PATH in NeoTree.
 If path is nil and no buffer file name, then use DEFAULT-PATH,
 
 (fn &optional PATH DEFAULT-PATH)" t)
-(autoload 'neotree-projectile-action "neotree" "\
-Integration with `Projectile'.
+(autoload 'neotree-projectile-action "neotree"
+"Integration with `Projectile'.
 
 Usage:
     (setq projectile-switch-project-action 'neotree-projectile-action).
 
 When running `projectile-switch-project' (C-c p p), `neotree' will change root
 automatically." t)
-(autoload 'neotree-toggle "neotree" "\
-Toggle show the NeoTree window." t)
-(autoload 'neotree-show "neotree" "\
-Show the NeoTree window." t)
-(autoload 'neotree-hide "neotree" "\
-Close the NeoTree window." t)
-(autoload 'neotree-dir "neotree" "\
-Show the NeoTree window, and change root to PATH.
+(autoload 'neotree-toggle "neotree"
+"Toggle show the NeoTree window." t)
+(autoload 'neotree-show "neotree"
+"Show the NeoTree window." t)
+(autoload 'neotree-hide "neotree"
+"Close the NeoTree window." t)
+(autoload 'neotree-dir "neotree"
+"Show the NeoTree window, and change root to PATH.
 
 (fn PATH)" t)
-(defalias 'neotree 'neotree-show "\
-Show the NeoTree window.")
+(defalias 'neotree 'neotree-show
+"Show the NeoTree window.")
 (register-definition-prefixes "neotree" '("neo" "off-p"))
 
 ;;; End of scraped data

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/haskell-sort-imports.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/haskell-sort-imports.el

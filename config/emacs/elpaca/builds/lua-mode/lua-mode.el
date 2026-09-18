@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/lua-mode/lua-mode.el
+/home/ctschwandt/.config/emacs/elpaca/sources/lua-mode/lua-mode.el

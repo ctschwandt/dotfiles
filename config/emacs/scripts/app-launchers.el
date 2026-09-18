@@ -1,4 +1,4 @@
-;;; app-launchers.el --- Possible alternatives to dmenu/rofi
+;;; app-launchers.el --- App launcher functions -*- lexical-binding: t; -*-
 
 ;;; Code:
 

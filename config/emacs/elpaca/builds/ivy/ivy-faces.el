@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/swiper/ivy-faces.el
+/home/ctschwandt/.config/emacs/elpaca/sources/swiper/ivy-faces.el

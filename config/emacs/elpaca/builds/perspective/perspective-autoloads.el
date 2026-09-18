@@ -9,16 +9,16 @@
 
 ;;; Generated autoloads from perspective.el
 
-(defvar persp-mode nil "\
-Non-nil if Persp mode is enabled.
+(defvar persp-mode nil
+"Non-nil if Persp mode is enabled.
 See the `persp-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `persp-mode'.")
 (custom-autoload 'persp-mode "perspective" nil)
-(autoload 'persp-mode "perspective" "\
-Toggle perspective mode.
+(autoload 'persp-mode "perspective"
+"Toggle perspective mode.
 
 When active, keeps track of multiple 'perspectives',
 named collections of buffers and window configurations.
@@ -38,57 +38,57 @@ The mode's hook is called both when the mode is enabled and when it is
 disabled.
 
 (fn &optional ARG)" t)
-(autoload 'persp-switch-to-buffer* "perspective" "\
-Like `switch-to-buffer', restricted to the current perspective.
+(autoload 'persp-switch-to-buffer* "perspective"
+"Like `switch-to-buffer', restricted to the current perspective.
 This respects ido-ignore-buffers, since we automatically add
 buffer filtering to ido-mode already (see use of
 PERSP-SET-IDO-BUFFERS).
 
 (fn BUFFER-OR-NAME)" t)
-(autoload 'persp-kill-buffer* "perspective" "\
-Like `kill-buffer', restricted to the current perspective.
+(autoload 'persp-kill-buffer* "perspective"
+"Like `kill-buffer', restricted to the current perspective.
 This respects ido-ignore-buffers, since we automatically add
 buffer filtering to ido-mode already (see use of
 PERSP-SET-IDO-BUFFERS).
 
 (fn BUFFER-OR-NAME)" t)
-(autoload 'persp-kill-other-buffers "perspective" "\
-Kill all buffers in the current perspective other than the current one.
+(autoload 'persp-kill-other-buffers "perspective"
+"Kill all buffers in the current perspective other than the current one.
 Also excludes the perspective's scratch buffer." t)
-(autoload 'persp-buffer-menu "perspective" "\
-Like the default C-x C-b, but filters for the current perspective's buffers.
+(autoload 'persp-buffer-menu "perspective"
+"Like the default C-x C-b, but filters for the current perspective's buffers.
 
 (fn ARG)" t)
-(autoload 'persp-list-buffers "perspective" "\
-Like the default C-x C-b, but filters for the current perspective's buffers.
+(autoload 'persp-list-buffers "perspective"
+"Like the default C-x C-b, but filters for the current perspective's buffers.
 
 (fn ARG)" t)
-(autoload 'persp-bs-show "perspective" "\
-Invoke BS-SHOW with a configuration enabled for Perspective.
+(autoload 'persp-bs-show "perspective"
+"Invoke BS-SHOW with a configuration enabled for Perspective.
 With a prefix arg, show buffers in all perspectives.
 This respects ido-ignore-buffers, since we automatically add
 buffer filtering to ido-mode already (see use of
 PERSP-SET-IDO-BUFFERS).
 
 (fn ARG)" t)
-(autoload 'persp-ibuffer "perspective" "\
-Invoke IBUFFER with a configuration enabled for Perspective.
+(autoload 'persp-ibuffer "perspective"
+"Invoke IBUFFER with a configuration enabled for Perspective.
 With a prefix arg, show buffers in all perspectives.
 This respects ido-ignore-buffers, since we automatically add
 buffer filtering to ido-mode already (see use of
 PERSP-SET-IDO-BUFFERS).
 
 (fn ARG)" t)
-(autoload 'persp-ivy-switch-buffer "perspective" "\
-A version of `ivy-switch-buffer' which respects perspectives.
+(autoload 'persp-ivy-switch-buffer "perspective"
+"A version of `ivy-switch-buffer' which respects perspectives.
 
 (fn ARG)" t)
-(autoload 'persp-counsel-switch-buffer "perspective" "\
-A version of `counsel-switch-buffer' which respects perspectives.
+(autoload 'persp-counsel-switch-buffer "perspective"
+"A version of `counsel-switch-buffer' which respects perspectives.
 
 (fn ARG)" t)
-(autoload 'persp-state-save "perspective" "\
-Save the current perspective state to FILE.
+(autoload 'persp-state-save "perspective"
+"Save the current perspective state to FILE.
 
 FILE defaults to the value of persp-state-default-file if it is
 set.
@@ -103,8 +103,8 @@ visible in a perspective as windows, they will be saved as
 '*scratch* (persp)' buffers.
 
 (fn &optional FILE INTERACTIVE?)" t)
-(autoload 'persp-state-load "perspective" "\
-Restore the perspective state saved in FILE.
+(autoload 'persp-state-load "perspective"
+"Restore the perspective state saved in FILE.
 
 FILE defaults to the value of persp-state-default-file if it is
 set.
@@ -114,10 +114,10 @@ Each perspective's buffer list and window layout are also
 restored.
 
 (fn FILE)" t)
-(autoload 'persp-ibuffer-generate-filter-groups "perspective" "\
-Create a set of ibuffer filter groups based on the persp name of buffers.")
-(autoload 'persp-ibuffer-set-filter-groups "perspective" "\
-Set the current filter groups to filter by persp name." t)
+(autoload 'persp-ibuffer-generate-filter-groups "perspective"
+"Create a set of ibuffer filter groups based on the persp name of buffers.")
+(autoload 'persp-ibuffer-set-filter-groups "perspective"
+"Set the current filter groups to filter by persp name." t)
 (register-definition-prefixes "perspective" '("check-persp" "make-persp" "persp" "quick-perspective-keys" "with-"))
 
 ;;; End of scraped data

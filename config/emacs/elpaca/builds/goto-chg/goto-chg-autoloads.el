@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from goto-chg.el
 
-(autoload 'goto-last-change "goto-chg" "\
-Go to the point where the last edit was made in the current buffer.
+(autoload 'goto-last-change "goto-chg"
+"Go to the point where the last edit was made in the current buffer.
 Repeat the command to go to the second last edit, etc.
 
 To go back to more recent edit, the reverse of this command, use \\[goto-last-change-reverse]
@@ -35,8 +35,8 @@ At times, when undo information becomes too large, the oldest information is
 discarded. See variable `undo-limit'.
 
 (fn ARG)" t)
-(autoload 'goto-last-change-reverse "goto-chg" "\
-Go back to more recent changes after \\[goto-last-change] have been used.
+(autoload 'goto-last-change-reverse "goto-chg"
+"Go back to more recent changes after \\[goto-last-change] have been used.
 See `goto-last-change' for use of prefix argument.
 
 (fn ARG)" t)

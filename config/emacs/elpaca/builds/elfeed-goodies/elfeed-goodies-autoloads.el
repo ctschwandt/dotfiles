@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from elfeed-goodies.el
 
-(autoload 'elfeed-goodies/setup "elfeed-goodies" "\
-Setup Elfeed with extras:
+(autoload 'elfeed-goodies/setup "elfeed-goodies"
+"Setup Elfeed with extras:
 
 * Adaptive header bar and entries.
 * Header bar using powerline.
@@ -20,8 +20,8 @@ Setup Elfeed with extras:
 
 ;;; Generated autoloads from elfeed-goodies-logging.el
 
-(autoload 'elfeed-goodies/toggle-logs "elfeed-goodies-logging" "\
-Toggle the display of Elfeed logs in a popup window." t)
+(autoload 'elfeed-goodies/toggle-logs "elfeed-goodies-logging"
+"Toggle the display of Elfeed logs in a popup window." t)
 (register-definition-prefixes "elfeed-goodies-logging" '("elfeed-goodies/log-window-"))
 
 

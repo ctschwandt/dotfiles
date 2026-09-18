@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/themes/themes/doom-lantern-theme.el
+/home/ctschwandt/.config/emacs/elpaca/sources/themes/themes/doom-lantern-theme.el

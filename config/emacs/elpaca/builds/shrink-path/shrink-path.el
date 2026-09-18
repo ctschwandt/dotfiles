@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/shrink-path/shrink-path.el
+/home/ctschwandt/.config/emacs/elpaca/sources/shrink-path/shrink-path.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/elfeed/elfeed-search.el
+/home/ctschwandt/.config/emacs/elpaca/sources/elfeed/elfeed-search.el

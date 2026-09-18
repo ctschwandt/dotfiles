@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from rainbow-delimiters.el
 
-(autoload 'rainbow-delimiters-mode "rainbow-delimiters" "\
-Highlight nested parentheses, brackets, and braces according to their depth.
+(autoload 'rainbow-delimiters-mode "rainbow-delimiters"
+"Highlight nested parentheses, brackets, and braces according to their depth.
 
 This is a minor mode.  If called interactively, toggle the
 `Rainbow-Delimiters mode' mode.  If the prefix argument is positive,
@@ -27,10 +27,10 @@ The mode's hook is called both when the mode is enabled and when it is
 disabled.
 
 (fn &optional ARG)" t)
-(autoload 'rainbow-delimiters-mode-enable "rainbow-delimiters" "\
-Enable `rainbow-delimiters-mode'.")
-(autoload 'rainbow-delimiters-mode-disable "rainbow-delimiters" "\
-Disable `rainbow-delimiters-mode'.")
+(autoload 'rainbow-delimiters-mode-enable "rainbow-delimiters"
+"Enable `rainbow-delimiters-mode'.")
+(autoload 'rainbow-delimiters-mode-disable "rainbow-delimiters"
+"Disable `rainbow-delimiters-mode'.")
 (register-definition-prefixes "rainbow-delimiters" '("rainbow-delimiters-"))
 
 ;;; End of scraped data

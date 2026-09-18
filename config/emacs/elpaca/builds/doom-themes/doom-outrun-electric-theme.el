@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/themes/themes/doom-outrun-electric-theme.el
+/home/ctschwandt/.config/emacs/elpaca/sources/themes/themes/doom-outrun-electric-theme.el

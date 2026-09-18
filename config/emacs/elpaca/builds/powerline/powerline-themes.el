@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/powerline/powerline-themes.el
+/home/ctschwandt/.config/emacs/elpaca/sources/powerline/powerline-themes.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/evil/evil-digraphs.el
+/home/ctschwandt/.config/emacs/elpaca/sources/evil/evil-digraphs.el

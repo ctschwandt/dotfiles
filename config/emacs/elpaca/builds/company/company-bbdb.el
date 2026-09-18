@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/company-mode/company-bbdb.el
+/home/ctschwandt/.config/emacs/elpaca/sources/company-mode/company-bbdb.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/doc/haskell-mode.texi
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/doc/haskell-mode.texi

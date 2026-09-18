@@ -1,4 +1,4 @@
-This is magit-section.info, produced by makeinfo version 7.2 from
+This is magit-section.info, produced by makeinfo version 7.3 from
 magit-section.texi.
 
      Copyright (C) 2015-2026 Jonas Bernoulli
@@ -34,7 +34,7 @@ packages that have nothing to do with Magit or Git.
 and user options see *note (magit)Sections::.  This manual documents how
 you can use sections in your own packages.
 
-This manual is for Magit-Section version 4.5.0.
+This manual is for Magit-Section version 4.7.1.
 
      Copyright (C) 2015-2026 Jonas Bernoulli
      <emacs.magit@jonas.bernoulli.dev>
@@ -172,6 +172,23 @@ File: magit-section.info,  Node: Creating Sections,  Next: Core Functions,  Prev
      buffer is reached.  FUNCTION has to move point forward or return
      ‘nil’.
 
+   You have to define some function that calls ‘magit-insert-section’ to
+populate a buffer with sections.  After doing so, that function also has
+to call a few other functions, to put the sections in a good initial
+state.  You will likely need these lines:
+
+     (let ((magit-section-cache-visibility nil))
+       (magit-section-show magit-root-section))
+     (magit-section-update-highlight)
+     (set-buffer-modified-p nil)
+
+   Magit does that in ‘magit-refresh-buffer’.  Look at that function for
+inspiration, and also check out how that function is being used in in
+‘magit-mode.el’.  The code in that library is to specialized to Magit's
+needs to be made part of the ‘magit-section’ package, but a magit-like
+package will likely have to perform mode and buffer setup in a similar
+fashion.
+
 
 File: magit-section.info,  Node: Core Functions,  Next: Matching Functions,  Prev: Creating Sections,  Up: Top
 
@@ -308,8 +325,8 @@ Tag Table:
 Node: Top808
 Node: Introduction2109
 Node: Creating Sections2879
-Node: Core Functions7818
-Node: Matching Functions10993
+Node: Core Functions8628
+Node: Matching Functions11803
 
 End Tag Table
 

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/transient/lisp/transient.el
+/home/ctschwandt/.config/emacs/elpaca/sources/transient/lisp/transient.el

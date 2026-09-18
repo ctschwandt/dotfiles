@@ -14,8 +14,8 @@
 
 ;;; Generated autoloads from ocamldebug.el
 
-(autoload 'ocamldebug "ocamldebug" "\
-Run ocamldebug on program FILE in buffer *ocamldebug-FILE*.
+(autoload 'ocamldebug "ocamldebug"
+"Run ocamldebug on program FILE in buffer *ocamldebug-FILE*.
 The directory containing FILE becomes the initial working directory
 and source-file directory for ocamldebug.  If you wish to change this, use
 the ocamldebug commands `cd DIR' and `directory'.
@@ -27,13 +27,15 @@ the ocamldebug commands `cd DIR' and `directory'.
 
 ;;; Generated autoloads from tuareg.el
 
-(add-to-list 'auto-mode-alist '("\\.ml[ip]?\\'" . tuareg-mode))
-(add-to-list 'auto-mode-alist '("\\.eliomi?\\'" . tuareg-mode))
+(add-to-list 'auto-mode-alist '("\\.mli\\'" . tuareg-interface-mode))
+(add-to-list 'auto-mode-alist '("\\.ml[p]?\\'" . tuareg-mode))
+(add-to-list 'auto-mode-alist '("\\.eliomi\\'" . tuareg-interface-mode))
+(add-to-list 'auto-mode-alist '("\\.eliom\\'" . tuareg-mode))
 (dolist (ext '(".cmo" ".cmx" ".cma" ".cmxa" ".cmi"
                ".annot" ".cmt" ".cmti"))
  (add-to-list 'completion-ignored-extensions ext))
-(autoload 'tuareg-mode "tuareg" "\
-Major mode for editing OCaml code.
+(autoload 'tuareg-mode "tuareg"
+"Major mode for editing OCaml code.
 
 Provides automatic indentation and compilation interface.  Performs font/color
 highlighting using Font-Lock.  It is designed for OCaml but handles
@@ -69,19 +71,25 @@ Short cuts for the Tuareg mode:
 \\{tuareg-mode-map}
 
 Short cuts for interactions with the REPL:
-\\{tuareg-interactive-mode-map}
+\\{tuareg-interactive-mode-map}" t)
+(autoload 'tuareg-interface-mode "tuareg"
+"Major mode for editing OCaml interface (.mli) files.
 
-(fn)" t)
+In addition to any hooks its parent mode `tuareg-mode' might have run,
+this mode runs the hook `tuareg-interface-mode-hook', as the final or
+penultimate step during initialization.
+
+\\{tuareg-interface-mode-map}" t)
 (with-eval-after-load 'compile (let ((rule (eval-when-compile `(ocaml ,(rx bol (32 (group-n 9 "       ")) (group-n 1 (or "File " (seq (or "Raised at" "Re-raised at" "Raised by primitive operation at" "Called from") (* nonl) " file ")) (group-n 2 (32 "\"")) (group-n 3 (+ (not (in "	
  \",<>")))) (backref 2) (32 " (inlined)") ", line" (32 "s") " " (group-n 4 (+ (in "0-9"))) (32 "-" (group-n 5 (+ (in "0-9")))) (32 ", character" (32 "s") " " (group-n 6 (+ (in "0-9"))) (32 "-" (group-n 7 (+ (in "0-9"))))) (32 ":")) (32 "
 " (* (in "	 ")) (* (or (seq (+ (in "0-9")) " | " (* nonl)) (+ "^")) "
 " (* (in "	 "))) (group-n 8 (or "Warning" "Alert") (* (not (in ":
 "))) ":"))) 3 (4 . 5) (6 . tuareg--end-column) (8 . 9) 1 (8 font-lock-function-name-face))))) (defvar compilation-error-regexp-alist) (defvar compilation-error-regexp-alist-alist) (setq compilation-error-regexp-alist-alist (assq-delete-all 'ocaml compilation-error-regexp-alist-alist)) (push rule compilation-error-regexp-alist-alist) (setq compilation-error-regexp-alist (delq 'ocaml compilation-error-regexp-alist)) (push 'ocaml compilation-error-regexp-alist)))
-(autoload 'tuareg--end-column "tuareg" "\
-Return the end-column number in a parsed OCaml message.
+(autoload 'tuareg--end-column "tuareg"
+"Return the end-column number in a parsed OCaml message.
 OCaml uses exclusive end-columns but Emacs wants them to be inclusive.")
-(autoload 'tuareg-run-ocaml "tuareg" "\
-Run an OCaml REPL process.  I/O via buffer `*OCaml*'." t)
+(autoload 'tuareg-run-ocaml "tuareg"
+"Run an OCaml REPL process.  I/O via buffer `*OCaml*'." t)
 (defalias 'run-ocaml #'tuareg-run-ocaml)
 (add-to-list 'interpreter-mode-alist '("ocamlrun" . tuareg-mode))
 (add-to-list 'interpreter-mode-alist '("ocaml" . tuareg-mode))
@@ -96,21 +104,29 @@ Run an OCaml REPL process.  I/O via buffer `*OCaml*'." t)
 ;;; Generated autoloads from tuareg-menhir.el
 
 (add-to-list 'auto-mode-alist '("\\.mly\\'" . tuareg-menhir-mode))
-(autoload 'tuareg-menhir-mode "tuareg-menhir" "\
-Major mode to edit Menhir (and Ocamlyacc) files.
+(autoload 'tuareg-menhir-mode "tuareg-menhir"
+"Major mode to edit Menhir (and Ocamlyacc) files.
 
-(fn)" t)
+In addition to any hooks its parent mode `prog-mode' might have run,
+this mode runs the hook `tuareg-menhir-mode-hook', as the final or
+penultimate step during initialization.
+
+\\{tuareg-menhir-mode-map}" t)
 (register-definition-prefixes "tuareg-menhir" '("tuareg-menhir-"))
 
 
 ;;; Generated autoloads from tuareg-opam.el
 
-(autoload 'tuareg-opam-mode "tuareg-opam" "\
-Major mode to edit opam files.
+(autoload 'tuareg-opam-mode "tuareg-opam"
+"Major mode to edit opam files.
 
-(fn)" t)
-(autoload 'tuareg-opam-update-env "tuareg-opam" "\
-Update the environment to follow current OPAM switch configuration.
+In addition to any hooks its parent mode `prog-mode' might have run,
+this mode runs the hook `tuareg-opam-mode-hook', as the final or
+penultimate step during initialization.
+
+\\{tuareg-opam-mode-map}" t)
+(autoload 'tuareg-opam-update-env "tuareg-opam"
+"Update the environment to follow current OPAM switch configuration.
 
 Delegate the task to `opam-switch-set-switch' if the minor mode
 `opam-switch-mode' (https://github.com/ProofGeneral/opam-switch-mode)

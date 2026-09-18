@@ -9,21 +9,21 @@
 
 ;;; Generated autoloads from doom-modeline.el
 
-(autoload 'doom-modeline-set-main-modeline "doom-modeline" "\
-Set main mode-line.
+(autoload 'doom-modeline-set-main-modeline "doom-modeline"
+"Set main mode-line.
 If DEFAULT is non-nil, set the default mode-line for all buffers.
 
 (fn &optional DEFAULT)")
-(defvar doom-modeline-mode nil "\
-Non-nil if Doom-Modeline mode is enabled.
+(defvar doom-modeline-mode nil
+"Non-nil if Doom-Modeline mode is enabled.
 See the `doom-modeline-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `doom-modeline-mode'.")
 (custom-autoload 'doom-modeline-mode "doom-modeline" nil)
-(autoload 'doom-modeline-mode "doom-modeline" "\
-Toggle `doom-modeline' on or off.
+(autoload 'doom-modeline-mode "doom-modeline"
+"Toggle `doom-modeline' on or off.
 
 This is a global minor mode.  If called interactively, toggle the
 `Doom-Modeline mode' mode.  If the prefix argument is positive, enable
@@ -61,7 +61,7 @@ disabled.
 
 ;;; Generated autoloads from doom-modeline-segments.el
 
-(register-definition-prefixes "doom-modeline-segments" '("doom-modeline-"))
+(register-definition-prefixes "doom-modeline-segments" '("doom-m"))
 
 ;;; End of scraped data
 

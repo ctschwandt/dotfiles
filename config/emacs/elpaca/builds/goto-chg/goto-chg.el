@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/goto-chg/goto-chg.el
+/home/ctschwandt/.config/emacs/elpaca/sources/goto-chg/goto-chg.el

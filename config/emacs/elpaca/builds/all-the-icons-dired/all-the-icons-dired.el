@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/all-the-icons-dired/all-the-icons-dired.el
+/home/ctschwandt/.config/emacs/elpaca/sources/all-the-icons-dired/all-the-icons-dired.el

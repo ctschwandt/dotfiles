@@ -9,10 +9,10 @@
 
 ;;; Generated autoloads from toc-org.el
 
-(autoload 'toc-org-enable "toc-org" "\
-Enable toc-org in this buffer.")
-(autoload 'toc-org-mode "toc-org" "\
-Toggle `toc-org' in this buffer.
+(autoload 'toc-org-enable "toc-org"
+"Enable toc-org in this buffer.")
+(autoload 'toc-org-mode "toc-org"
+"Toggle `toc-org' in this buffer.
 
 This is a minor mode.  If called interactively, toggle the `Toc-Org
 mode' mode.  If the prefix argument is positive, enable the mode, and if

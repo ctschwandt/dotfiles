@@ -9,19 +9,19 @@
 
 ;;; Generated autoloads from sudo-edit.el
 
-(autoload 'sudo-edit-set-header "sudo-edit" "\
-*Display a warning in header line of the current buffer.
+(autoload 'sudo-edit-set-header "sudo-edit"
+"*Display a warning in header line of the current buffer.
 This function is suitable to add to `find-file-hook' and `dired-file-hook'.")
-(defvar sudo-edit-indicator-mode nil "\
-Non-nil if Sudo-Edit-Indicator mode is enabled.
+(defvar sudo-edit-indicator-mode nil
+"Non-nil if Sudo-Edit-Indicator mode is enabled.
 See the `sudo-edit-indicator-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `sudo-edit-indicator-mode'.")
 (custom-autoload 'sudo-edit-indicator-mode "sudo-edit" nil)
-(autoload 'sudo-edit-indicator-mode "sudo-edit" "\
-Indicates editing as root by displaying a message in the header line.
+(autoload 'sudo-edit-indicator-mode "sudo-edit"
+"Indicates editing as root by displaying a message in the header line.
 
 This is a global minor mode.  If called interactively, toggle the
 `Sudo-Edit-Indicator mode' mode.  If the prefix argument is positive,
@@ -38,15 +38,15 @@ The mode's hook is called both when the mode is enabled and when it is
 disabled.
 
 (fn &optional ARG)" t)
-(autoload 'sudo-edit "sudo-edit" "\
-Edit currently visited file as another user, by default `sudo-edit-user'.
+(autoload 'sudo-edit "sudo-edit"
+"Edit currently visited file as another user, by default `sudo-edit-user'.
 
 With a prefix ARG prompt for a file to visit.  Will also prompt
 for a file to visit if current buffer is not visiting a file.
 
 (fn &optional ARG)" t)
-(autoload 'sudo-edit-find-file "sudo-edit" "\
-Edit FILENAME as another user, by default `sudo-edit-user'.
+(autoload 'sudo-edit-find-file "sudo-edit"
+"Edit FILENAME as another user, by default `sudo-edit-user'.
 
 (fn FILENAME)" t)
 (register-definition-prefixes "sudo-edit" '("sudo-edit-"))

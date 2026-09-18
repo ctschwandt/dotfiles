@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/frame-local/frame-local.el
+/home/ctschwandt/.config/emacs/elpaca/sources/frame-local/frame-local.el

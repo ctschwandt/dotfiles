@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from all-the-icons-dired.el
 
-(autoload 'all-the-icons-dired-mode "all-the-icons-dired" "\
-Display all-the-icons icon for each file in a Dired buffer.
+(autoload 'all-the-icons-dired-mode "all-the-icons-dired"
+"Display all-the-icons icon for each file in a Dired buffer.
 
 This is a minor mode.  If called interactively, toggle the
 `All-The-Icons-Dired mode' mode.  If the prefix argument is positive,

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/projectile/projectile.el
+/home/ctschwandt/.config/emacs/elpaca/sources/projectile/projectile.el

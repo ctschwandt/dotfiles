@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/merlin/emacs/merlin-cap.el
+/home/ctschwandt/.config/emacs/elpaca/sources/merlin/emacs/merlin-cap.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/haskell-align-imports.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/haskell-align-imports.el

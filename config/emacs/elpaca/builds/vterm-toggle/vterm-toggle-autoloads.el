@@ -9,26 +9,26 @@
 
 ;;; Generated autoloads from vterm-toggle.el
 
-(autoload 'vterm-toggle "vterm-toggle" "\
-Vterm toggle.
+(autoload 'vterm-toggle "vterm-toggle"
+"Vterm toggle.
 Optional argument ARGS .
 
 (fn &optional ARGS)" t)
-(autoload 'vterm-toggle-cd "vterm-toggle" "\
-Vterm toggle and insert a cd command.
+(autoload 'vterm-toggle-cd "vterm-toggle"
+"Vterm toggle and insert a cd command.
 Optional argument ARGS .
 
 (fn &optional ARGS)" t)
-(autoload 'vterm-toggle-insert-cd "vterm-toggle" "\
-Cd to the directory where your previous buffer file exists.
+(autoload 'vterm-toggle-insert-cd "vterm-toggle"
+"Cd to the directory where your previous buffer file exists.
 after you have toggle to the vterm buffer with `vterm-toggle'." t)
-(autoload 'vterm-toggle-forward "vterm-toggle" "\
-Go to the next term buffer.
+(autoload 'vterm-toggle-forward "vterm-toggle"
+"Go to the next term buffer.
 If OFFSET is `non-nil', will goto next term buffer with OFFSET.
 
 (fn &optional OFFSET)" t)
-(autoload 'vterm-toggle-backward "vterm-toggle" "\
-Go to the previous term buffer.
+(autoload 'vterm-toggle-backward "vterm-toggle"
+"Go to the previous term buffer.
 If OFFSET is `non-nil', will goto next term buffer with OFFSET.
 
 (fn &optional OFFSET)" t)

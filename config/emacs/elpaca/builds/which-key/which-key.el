@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/emacs-which-key/which-key.el
+/home/ctschwandt/.config/emacs/elpaca/sources/emacs-which-key/which-key.el

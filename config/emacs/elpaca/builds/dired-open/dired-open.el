@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/dired-hacks/dired-open.el
+/home/ctschwandt/.config/emacs/elpaca/sources/dired-hacks/dired-open.el

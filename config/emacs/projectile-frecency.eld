@@ -1,0 +1,1 @@
+(("/home/ctschwandt/courses/ciss465/Logisimp/" ("include/Port.h'" 1 1789741884) ("include/Component.h" 1 1789741782) ("include/Port.h" 2 1789741891) ("include/Gate.h" 1 1789741486)) ("/home/ctschwandt/courses/" ("ciss450/a/a02/a02q01/main.py" 2 1789739241)))

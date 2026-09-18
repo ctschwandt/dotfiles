@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/evil-tutor/evil-tutor.el
+/home/ctschwandt/.config/emacs/elpaca/sources/evil-tutor/evil-tutor.el

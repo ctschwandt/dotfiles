@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/magit/lisp/magit-remote.el
+/home/ctschwandt/.config/emacs/elpaca/sources/magit/lisp/magit-remote.el

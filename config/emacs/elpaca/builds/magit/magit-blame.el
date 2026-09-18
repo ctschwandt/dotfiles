@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/magit/lisp/magit-blame.el
+/home/ctschwandt/.config/emacs/elpaca/sources/magit/lisp/magit-blame.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/perspective-el/perspective.el
+/home/ctschwandt/.config/emacs/elpaca/sources/perspective-el/perspective.el

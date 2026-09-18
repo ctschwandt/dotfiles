@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/ocp-indent/tools/ocp-indent.el
+/home/ctschwandt/.config/emacs/elpaca/sources/ocp-indent/tools/ocp-indent.el

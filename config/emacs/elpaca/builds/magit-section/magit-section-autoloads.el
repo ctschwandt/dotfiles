@@ -9,8 +9,8 @@
 
 ;;; Generated autoloads from magit-section.el
 
-(autoload 'magit-add-section-hook "magit-section" "\
-Add to the value of section hook HOOK the function FUNCTION.
+(autoload 'magit-add-section-hook "magit-section"
+"Add to the value of section hook HOOK the function FUNCTION.
 
 Add FUNCTION at the beginning of the hook list unless optional
 APPEND is non-nil, in which case FUNCTION is added at the end.
@@ -37,8 +37,8 @@ should not be abused for other side-effects.  To remove FUNCTION
 again use `remove-hook'.
 
 (fn HOOK FUNCTION &optional AT APPEND LOCAL)")
-(autoload 'magit--handle-bookmark "magit-section" "\
-Open a bookmark created by `magit--make-bookmark'.
+(autoload 'magit--handle-bookmark "magit-section"
+"Open a bookmark created by `magit--make-bookmark'.
 
 Call the generic function `magit-bookmark-get-buffer-create' to get
 the appropriate buffer without displaying it.

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/toc-org/toc-org.el
+/home/ctschwandt/.config/emacs/elpaca/sources/toc-org/toc-org.el

@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/haskell-mode/haskell-sandbox.el
+/home/ctschwandt/.config/emacs/elpaca/sources/haskell-mode/haskell-sandbox.el

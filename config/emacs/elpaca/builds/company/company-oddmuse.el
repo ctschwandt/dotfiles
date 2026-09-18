@@ -1,1 +1,1 @@
-/home/ctschwandt/.config/emacs/elpaca/repos/company-mode/company-oddmuse.el
+/home/ctschwandt/.config/emacs/elpaca/sources/company-mode/company-oddmuse.el
