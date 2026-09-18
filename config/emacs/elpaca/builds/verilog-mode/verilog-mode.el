@@ -1,0 +1,1 @@
+/home/ctschwandt/.config/emacs/elpaca/repos/verilog-mode/lisp/progmodes/verilog-mode.el

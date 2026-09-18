@@ -43,6 +43,7 @@
 - [[#sane-defaults][SANE DEFAULTS]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#eshell][Eshell]]
+- [[#verilog][Verilog]]
 - [[#vterm][Vterm]]
 - [[#vterm-toggle][Vterm-Toggle]]
 - [[#sudo-edit][SUDO EDIT]]
@@ -978,6 +979,14 @@ Eshell is an Emacs 'shell' that is written in Elisp.
         eshell-scroll-to-bottom-on-input t
         eshell-destroy-buffer-when-process-dies t
         eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
+#+end_src
+
+
+* Verilog
+Custom Verilog formatting
+#+begin_src emacs-lisp
+(with-eval-after-load 'verilog-mode
+  (setq verilog-auto-newline nil))
 #+end_src
 
 * Vterm

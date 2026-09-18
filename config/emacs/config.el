@@ -721,6 +721,9 @@
         eshell-destroy-buffer-when-process-dies t
         eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
 
+(with-eval-after-load 'verilog-mode
+  (setq verilog-auto-newline nil))
+
 (use-package vterm
   :commands vterm
   :config
