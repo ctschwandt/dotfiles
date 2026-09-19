@@ -1,5 +1,3 @@
-;; -*- lexical-binding: t; -*-
-
 (defconst dt/emacs-dir user-emacs-directory
   "Root of this Emacs config.")
 
@@ -139,6 +137,26 @@
                           indent-tabs-mode nil))))
 
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
+
+(defun cole/insert-comment-header (char)
+  "Insert a three-line // comment header made from CHAR."
+  (insert "//" (make-string 77 char) "\n")
+  (insert "// ")
+  (save-excursion
+    (insert "\n//" (make-string 77 char) "\n")))
+
+(defun cole/insert-comment-header-equals ()
+  "Insert an equals-sign comment header."
+  (interactive)
+  (cole/insert-comment-header ?=))
+
+(defun cole/insert-comment-header-dashes ()
+  "Insert a dash comment header."
+  (interactive)
+  (cole/insert-comment-header ?-))
+
+(global-set-key (kbd "C-c a") #'cole/insert-comment-header-equals)
+(global-set-key (kbd "C-c b") #'cole/insert-comment-header-dashes)
 
 (use-package company
   :defer 2

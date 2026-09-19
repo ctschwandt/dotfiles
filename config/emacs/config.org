@@ -11,10 +11,12 @@
 - [[#all-the-icons][ALL THE ICONS]]
 - [[#cc-indentation-style][C/C++ INDENTATION STYLE]]
 - [[#backup][BACKUP]]
+- [[#code-comment-header-macros][CODE COMMENT HEADER MACROS]]
 - [[#company][COMPANY]]
 - [[#dashboard][DASHBOARD]]
 - [[#diminish][DIMINISH]]
 - [[#elfeed][ELFEED]]
+- [[#error-fixes][ERROR FIXES]]
 - [[#evil][EVIL]]
 - [[#flycheck][FLYCHECK]]
 - [[#fonts][FONTS]]
@@ -219,6 +221,53 @@ By default, Emacs creates automatic backups of files in their original directori
 
 #+end_src
 
+* CODE COMMENT HEADER MACROS
+Quick shortcuts for inserting formatted comment headers in source files.
+`C-c a` creates an equals-sign header, while `C-c b` creates a dashed header.
+The cursor is placed in the middle line so the section title can be typed immediately.
+#+begin_src emacs-lisp
+(require 'newcomment)
+(require 'subr-x)
+
+(defun cole/insert-comment-header ()
+  "Insert a 79-character comment header using the current language's comments."
+  (interactive)
+
+  ;; Make sure comment-start/comment-end are set for the current major mode.
+  (comment-normalize-vars)
+
+  (let* ((start (string-trim (or comment-start "")))
+         (end   (string-trim (or comment-end "")))
+         (width 79)
+         (fill-count (- width
+                        (length start)
+                        (length end))))
+
+    (when (string-empty-p start)
+      (user-error "No comment syntax defined for this mode"))
+
+    ;; Top line
+    (insert start
+            (make-string fill-count ?=)
+            end
+            "\n")
+
+    ;; Middle line -- leave point here for typing the title.
+    (insert start " ")
+
+    ;; Insert everything after point without moving point.
+    (save-excursion
+      (when (not (string-empty-p end))
+        (insert " " end))
+
+      (insert "\n"
+              start
+              (make-string fill-count ?=)
+              end))))
+
+(global-set-key (kbd "C-c a") #'cole/insert-comment-header)
+#+end_src
+
 * COMPANY
 [[https://company-mode.github.io/][Company]] is a text completion framework for Emacs. The name stands for "complete anything".  Completion will start automatically after you type a few letters. Use M-n and M-p to select, <return> to complete or <tab> to complete the common part.
 
@@ -333,6 +382,12 @@ An RSS newsfeed reader for Emacs.  Move through the articles with 'j/k'.  Move t
 #+end_src
 
 #+RESULTS:
+
+* ERROR FIXES
+Stops lisp lexical binding warning
+#+begin_src emacs-lisp
+;;; config.el --- Cole's Emacs config -*- lexical-binding: t; -*-
+#+end_src
 
 * EVIL
 [[https://github.com/emacs-evil/evil][Evil]] is an extensible vi/vim layer for Emacs.  Because...let's face it.  The Vim keybindings are just plain better.
